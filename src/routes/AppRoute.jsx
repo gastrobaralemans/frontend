@@ -1,4 +1,6 @@
 import Home from "../pages/Index.jsx"
+import Login from "../pages/auth/login.jsx"
+import Register from "../pages/auth/register.jsx"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const AppRouter = () =>{
@@ -6,6 +8,8 @@ const AppRouter = () =>{
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home/>}/>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/register" element={<Register/>}/>
             </Routes>
         </BrowserRouter>
     );
