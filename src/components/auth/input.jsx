@@ -1,11 +1,15 @@
-const Input = ({type = "text", placeholder}) =>{
-    return(
-        <input
-            type={type} 
-            placeholder={placeholder}
-            className="w-full p-2 border border-black"   
-        />
-            
+const Input = ({ type = "text", name, placeholder, value, onChange }) => {
+    return (
+      <input
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        className="w-full p-2 border border-black"
+      />
     );
-}
-export default Input;
+  };
+  
+  export default Input;
+  

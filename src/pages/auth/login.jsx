@@ -6,13 +6,13 @@ import Button from '../../components/auth/button';
 
 const Login = () =>{
     const [correo, setCorreo] = useState('');
-    const [contraseña, setContraseña] = useState('');
+    const [pass, setPass] = useState('');
     const handleLogin = async (e) => {
         e.preventDefault();
     
         const data = {
             correo:correo,
-            contraseña:contraseña
+            pass:pass
         };
     
         const response = await fetch("http://localhost:8080/api/auth/login",{
@@ -32,8 +32,8 @@ const Login = () =>{
                 <h2 className="text-2xl font-semibold text-red-800 mb-4">Iniciar sesión</h2>
 
                 <form onSubmit={handleLogin} className="space-y-4">
-                <Input type="text" name="correo" placeholder="jonhdoe@johndoe.com" value={correo} onChange={(e) =>setCorreo(e.target.value)}/>
-                <Input type="password" name="contraseña" placeholder="********" value={contraseña} onChange={(e) =>setContraseña(e.target.value)}/>
+                <Input type="text" name="correo" placeholder="johndoe@mail.com" value={correo} onChange={(e) =>setCorreo(e.target.value)}/>
+                <Input type="password" name="pass" placeholder="********" value={pass} onChange={(e) =>setPass(e.target.value)}/>
                 <Button type="submit">Iniciar sesión</Button>
                 </form>
 
