@@ -32,9 +32,9 @@ const Login = () =>{
                 <h2 className="text-2xl font-semibold text-red-800 mb-4">Iniciar sesión</h2>
 
                 <form onSubmit={handleLogin} className="space-y-4">
-                <Input type="text" name="correo" placeholder="johndoe@mail.com" value={correo} onChange={(e) =>setCorreo(e.target.value)}/>
-                <Input type="password" name="pass" placeholder="********" value={pass} onChange={(e) =>setPass(e.target.value)}/>
-                <Button type="submit">Iniciar sesión</Button>
+                    <Input type="text" name="correo" placeholder="johndoe@mail.com" value={correo} onChange={(e) =>setCorreo(e.target.value)}/>
+                    <Input type="password" name="pass" placeholder="********" value={pass} onChange={(e) =>setPass(e.target.value)}/>
+                    <Button type="submit">Iniciar sesión</Button>
                 </form>
 
                 <p className="text-center mt-4 text-sm">
