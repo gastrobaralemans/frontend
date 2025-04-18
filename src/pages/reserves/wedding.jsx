@@ -23,11 +23,12 @@ const Wedding = () =>{
             fecha:fecha,
             cantidad:cantidad,
             decoracion:decoracion,
-            comentarios:comentarios
+            comentarios:comentarios,
+            tipoEvento: "boda"
     };
     
     try {
-        const response = await fetch("http://localhost:8080/api/auth/birthday", {
+        const response = await fetch("http://localhost:8080/api/reservas", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -48,7 +49,7 @@ const Wedding = () =>{
             <div className="bg-white p-8 rounded shadow-md w-full max-w-sm">
                 <h2 className="text-2xl font-semibold text-[#7A0000] mb-4">Reserva para fiestas de bodas</h2>
 
-                <form className="space-y-4" onSubmit={handleReserveBirthday}>
+                <form className="space-y-4" onSubmit={handleReserveWedding}>
                     <Input type="text" name="nombre" placeholder="John Doe" value={nombre} onChange={(e) => setNombre(e.target.value)} />
                     <Input type="email" name="correo" placeholder="johndoe@mail.com" value={correo} onChange={(e) => setCorreo(e.target.value)} />
                     <Input type="tel" name="numero" placeholder="0000-0000" value={numero} onChange={(e) => setNumero(e.target.value)}/>
