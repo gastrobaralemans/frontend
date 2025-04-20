@@ -17,7 +17,7 @@ export default function AdminLayout() {
             <Link to="/admin/pedidos" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Pedidos</Link>
             <Link to="/admin/reportes" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Reportes</Link>
             <Link to="/admin/inventario" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Inventario</Link>
-            <Link to="/admin/crear-post" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Crear Post</Link>
+            <Link to="/admin/post" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Crear Post</Link>
             <Link to="/admin/logout" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Cerrar sesión</Link>
           </nav>
         </div>
