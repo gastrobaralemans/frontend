@@ -14,6 +14,7 @@ import DashboardAdmin from "../pages/admin/dashboard.jsx";
 import MenuPromosAdmin from "../pages/admin/menupromos.jsx";
 import PedidosAdmin from "../pages/admin/pedidos.jsx";
 import ReportesAdmin from "../pages/admin/Reportes.jsx";
+import ReservasAdmin from "../pages/admin/reservas.jsx";
 import InventarioAdmin from "../pages/admin/inventario.jsx";
 import PostAdmin from "../pages/admin/post.jsx";
 
@@ -37,6 +38,7 @@ const AppRouter = () => {
           <Route path="menu-promos" element={<MenuPromosAdmin />} />
           <Route path="pedidos" element={<PedidosAdmin />} />
           <Route path="reportes" element={<ReportesAdmin />} />
+          <Route path="reservas" element={<ReservasAdmin />} />
           <Route path="inventario" element={<InventarioAdmin />} />
           <Route path="post" element={<PostAdmin />} />
         </Route>
