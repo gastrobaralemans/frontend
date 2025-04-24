@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 
-export default function AdminLayout() {
+export default function MeseroLayout() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -18,15 +18,11 @@ export default function AdminLayout() {
         <div>
           <h1 className='text-xl font-bold pl-3 mb-15 my-5'>
             <span className='text-[#7A0000]'>Dash</span>
-            <span className='text-black'>Admin</span>
+            <span className='text-black'>Mesero</span>
           </h1>
           <nav className="space-y-10 text-xl">
-            <Link to="/admin/menu-promos" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Menu y promociones</Link>
-            <Link to="/admin/pedidos" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Pedidos</Link>
-            <Link to="/admin/reportes" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Reportes</Link>
-            <Link to="/admin/inventario" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Inventario</Link>
-            <Link to="/admin/post" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Crear Post</Link>
-            <Link to="/admin/reservas" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Reservas</Link>
+            <Link to="/mesero/registro-pedidos-mesero" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Registrar Pedido</Link>
+            <Link to="/mesero/historial-pedidos" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Historial de pedidos</Link>
             <button onClick={handleLogout} className="text-left w-full pl-5 hover:text-[#7A0000] hover:font-bold">Cerrar sesión</button>
           </nav>
         </div>
@@ -38,7 +34,7 @@ export default function AdminLayout() {
             <FontAwesomeIcon icon={faUser} />
         </div>
             <div className="text-right text-x pr-3 my-5">
-              <div className="font-medium">Admin</div>
+              <div className="font-medium">Mesero</div>
             </div>
           </div>
         </header>

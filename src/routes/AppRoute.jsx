@@ -1,7 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "../pages/Index.jsx";
 
-// Usuarios
+//routes
+import PrivateRoute from "./PrivateRoute.jsx";
+import RoleRoute from "./RoleRoute.jsx";
+import PublicOnlyRoute from "./publicsRoutes.jsx";
+
+//user
+import Home from "../pages/Index.jsx";
 import Login from "../pages/auth/login.jsx";
 import Register from "../pages/auth/register.jsx";
 import MenuPage from "../pages/menu/MenuPage.jsx";
@@ -20,22 +25,30 @@ import InventarioAdmin from "../pages/admin/inventario.jsx";
 import PostAdmin from "../pages/admin/post.jsx";
 
 //Cocineroo
+import CocineroLayout from "../layouts/cocineroLayout.jsx";
+import DashboardCocinero from "../pages/cocinero/dashboard.jsx";
+import InventarioIngredientesCocinero from "../pages/cocinero/inventario.jsx";
+import PedidosPreparacionCocinero from "../pages/cocinero/PedidosPreparacion.jsx";
 
+//mesero
+import MeseroLayout from "../layouts/meseroLayout.jsx";
+import DashboardMesero from "../pages/mesero/dashboard.jsx";
+import HistorialPedidos from "../pages/mesero/historialPedidos.jsx";
+import PedidosMesero from "../pages/mesero/pedidos.jsx";
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
         {/* Usuarios */}
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/menu" element={<MenuPage />} />
-        <Route path="/birthdayreserve" element={<Birthday />} />
-        <Route path="/graduationreserve" element={<Graduation />} />
-        <Route path="/weddingreserve" element={<Wedding />} />
-
+        <Route path="/login" element={<PublicOnlyRoute><Login /></PublicOnlyRoute>} />
+        <Route path="/register" element={<PublicOnlyRoute><Register /></PublicOnlyRoute>} />
+        <Route path="/menu" element={<RoleRoute allowedRoles={["usuario"]}><MenuPage /></RoleRoute>} />
+        <Route path="/birthdayreserve" element={<RoleRoute allowedRoles={["usuario"]}><Birthday /></RoleRoute>} />
+        <Route path="/graduationreserve" element={<RoleRoute allowedRoles={["usuario"]}><Graduation /></RoleRoute>} />
+        <Route path="/weddingreserve" element={<RoleRoute allowedRoles={["usuario"]}><Wedding /></RoleRoute>} />
         {/* Admin layout con rutas anidadas */}
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin" element={<RoleRoute allowedRoles={["admin"]}><AdminLayout /></RoleRoute>}>
           <Route path="dashboard" element={<DashboardAdmin />} />
           <Route path="menu-promos" element={<MenuPromosAdmin />} />
           <Route path="pedidos" element={<PedidosAdmin />} />
@@ -43,6 +56,18 @@ const AppRouter = () => {
           <Route path="reservas" element={<ReservasAdmin />} />
           <Route path="inventario" element={<InventarioAdmin />} />
           <Route path="post" element={<PostAdmin />} />
+        </Route>
+        {/* Cocinero layout con rutas anidadas */}
+        <Route path="/cocinero" element={<RoleRoute allowedRoles={["cocinero"]}><CocineroLayout /></RoleRoute>}>
+          <Route path="dashboard" element={<DashboardCocinero />} />
+          <Route path="inventario-cocinero" element={<InventarioIngredientesCocinero />} />
+          <Route path="pedidos-preparacion" element={<PedidosPreparacionCocinero />} />
+        </Route>
+        {/* Mesero layout con rutas anidadas */}
+        <Route path="/mesero" element={<RoleRoute allowedRoles={["mesero"]}><MeseroLayout /></RoleRoute>}>
+          <Route path="dashboard" element={<DashboardMesero />} />
+          <Route path="historial-pedidos" element={<HistorialPedidos />} />
+          <Route path="registro-pedidos-mesero" element={<PedidosMesero />} />
         </Route>
       </Routes>
     </BrowserRouter>

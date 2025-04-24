@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { useNavigate } from "react-router-dom"
 import {Link} from 'react-router-dom'
 import Input from '../../components/auth/input';
 import Button from '../../components/auth/button';
@@ -7,6 +8,7 @@ import Button from '../../components/auth/button';
 const Login = () =>{
     const [correo, setCorreo] = useState('');
     const [pass, setPass] = useState('');
+    const navigate = useNavigate();
     const handleLogin = async (e) => {
         e.preventDefault();
     
@@ -14,7 +16,7 @@ const Login = () =>{
             correo:correo,
             pass:pass
         };
-    
+    try{
         const response = await fetch("http://localhost:8080/api/auth/login",{
             method: "POST",
             headers: {
@@ -22,8 +24,35 @@ const Login = () =>{
             },
             body: JSON.stringify(data)
         });
-        const text = await response.text();
-        alert(text);
+        if (response.ok) {
+            const json = await response.json();
+            localStorage.setItem("token", json.token);
+            localStorage.setItem("refreshToken", json.refreshToken);
+            localStorage.setItem("nombre", json.nombre);
+            localStorage.setItem("rol", json.rol);
+            switch(json.rol){
+                case "admin":
+                    navigate("/admin/dashboard");
+                    break;
+                case "mesero":
+                    navigate("/mesero/dashboard");
+                    break;
+                case "cocinero":
+                    navigate("/cocinero/dashboard");
+                    break;
+                default:
+                    navigate("/");
+                    break;
+            }
+        }
+        else {
+            const errorMsg = await response.text();
+            alert("Error: " + errorMsg);
+        }
+    } catch (error) {
+        console.error(error);
+        alert("Error de conexión con el servidor");
+    }
     } 
     return(
         <>
