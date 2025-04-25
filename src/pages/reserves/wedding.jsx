@@ -1,67 +1,125 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react';
 import Input from '../../components/auth/input';
 import Button from '../../components/auth/button';
-const Wedding = () =>{
-    const [nombre, setNombre] = useState('');
-    const [correo, setCorreo] = useState('');
-    const [numero, setNumero] = useState('');
-    const [fecha, setFecha] = useState('');
-    const [cantidad, setCantidad] = useState('');
-    const [decoracion, setDecoracion] = useState('');
-    const [comentarios, setComentarios] = useState('');
 
-    const handleReserveWedding = async (e) =>{
-        e.preventDefault();
-        if (!nombre ||!correo ||!numero ||!fecha ||!cantidad ||!decoracion ||!comentarios ){
-            alert("campos obligatorios");
-            return;
+const Wedding = () => {
+  const [user, setUser] = useState({ nombre: '', correo: '' });
+  const [numero, setNumero] = useState('');
+  const [fecha, setFecha] = useState('');
+  const [cantidad, setCantidad] = useState('');
+  const [decoracion, setDecoracion] = useState('');
+  const [comentarios, setComentarios] = useState('');
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        const parsed = JSON.parse(storedUser);
+        if (parsed.nombre && parsed.correo) {
+          setUser(parsed);
         }
-        const data = {
-            nombre:nombre,
-            correo:correo,
-            numero:numero,
-            fecha:fecha,
-            cantidad:cantidad,
-            decoracion:decoracion,
-            comentarios:comentarios,
-            tipoEvento: "boda"
-    };
-    
-    try {
-        const response = await fetch("http://localhost:8080/api/reservas", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(data)
-        });
-    
-        const text = await response.text();
-        alert(text);
-      } catch (error) {
-        console.error(error);
-        alert("No se ha podido enviar la solicitud");
+      } catch (err) {
+        console.error("Error al parsear user:", err);
       }
-    };
-        return(
-        <>
-         <div className='min-h-screen flex items-center justify-center'>
-            <div className="bg-white p-8 rounded shadow-md w-full max-w-sm">
-                <h2 className="text-2xl font-semibold text-[#7A0000] mb-4">Reserva para fiestas de bodas</h2>
+    }
+  }, []);
+  
+  const handleReserveWedding = async (e) => {
+    e.preventDefault();
+    if (!numero || !fecha || !cantidad || !decoracion || !comentarios) {
+      alert('Todos los campos son obligatorios');
+      return;
+    }
 
-                <form className="space-y-4" onSubmit={handleReserveWedding}>
-                    <Input type="text" name="nombre" placeholder="John Doe" value={nombre} onChange={(e) => setNombre(e.target.value)} />
-                    <Input type="email" name="correo" placeholder="johndoe@mail.com" value={correo} onChange={(e) => setCorreo(e.target.value)} />
-                    <Input type="tel" name="numero" placeholder="0000-0000" value={numero} onChange={(e) => setNumero(e.target.value)}/>
-                    <Input type="datetime-local" name="fecha" value={fecha} onChange={(e) => setFecha(e.target.value)}/>
-                    <Input type="number" name="cantidad" placeholder="n# personas" min={1} value={cantidad} onChange={(e) => setCantidad(e.target.value)} />
-                    <Input type="text" name="decoracion" placeholder="¿decoracion especial?" value={decoracion} onChange={(e) => setDecoracion(e.target.value)} />
-                    <Input type="text" name="comentarios" placeholder="comentarios" value={comentarios} onChange={(e) => setComentarios(e.target.value)}/>
-                    <Button type="submit">Hacer reserva</Button>
-                </form>
-            </div>
-            </div>
-        </>
-    );
-  }
+    const data = {
+      numero,
+      fecha,
+      cantidad,
+      decoracion,
+      comentarios,
+      tipoEvento: 'graduacion'
+    };
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert("usuario no autenticado");
+      return;
+    }
+    try {
+      const response = await fetch('http://localhost:8080/api/reservas', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(data)
+      });
+
+      const text = await response.text();
+      alert(text);
+    } catch (error) {
+      console.error(error);
+      alert('No se ha podido enviar la solicitud');
+    }
+  };
+
+  return (
+    <div className='min-h-screen flex items-center justify-center'>
+      <div className='bg-white p-8 rounded shadow-md w-full max-w-sm'>
+        <h2 className='text-2xl font-semibold text-[#7A0000] mb-4'>Reserva para fiesta de bodas</h2>
+
+        <form className='space-y-4' onSubmit={handleReserveWedding}>
+          <Input
+            type='text'
+            name='nombre'
+            value={user.nombre}
+            readOnly
+          />
+          <Input
+            type='email'
+            name='correo'
+            value={user.correo}
+            readOnly
+          />
+          <Input
+            type='tel'
+            name='numero'
+            placeholder='0000-0000'
+            value={numero}
+            onChange={(e) => setNumero(e.target.value)}
+          />
+          <Input
+            type='datetime-local'
+            name='fecha'
+            value={fecha}
+            onChange={(e) => setFecha(e.target.value)}
+          />
+          <Input
+            type='number'
+            name='cantidad'
+            placeholder='n# personas'
+            min={1}
+            value={cantidad}
+            onChange={(e) => setCantidad(e.target.value)}
+          />
+          <Input
+            type='text'
+            name='decoracion'
+            placeholder='¿decoración especial?'
+            value={decoracion}
+            onChange={(e) => setDecoracion(e.target.value)}
+          />
+          <Input
+            type='text'
+            name='comentarios'
+            placeholder='comentarios'
+            value={comentarios}
+            onChange={(e) => setComentarios(e.target.value)}
+          />
+          <Button type='submit'>Hacer reserva</Button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
 export default Wedding;

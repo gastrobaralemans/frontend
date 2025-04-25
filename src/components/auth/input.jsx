@@ -1,4 +1,4 @@
-const Input = ({ type = "text", name, placeholder, value, onChange }) => {
+const Input = ({ type = "text", name, placeholder, value, onChange, min, readOnly }) => {
     return (
       <input
         type={type}
@@ -6,6 +6,8 @@ const Input = ({ type = "text", name, placeholder, value, onChange }) => {
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        min={min}
+        readOnly={readOnly}
         className="w-full p-2 border border-black"
       />
     );
