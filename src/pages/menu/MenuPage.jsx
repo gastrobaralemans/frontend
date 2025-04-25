@@ -7,10 +7,19 @@ const MenuPage = () => {
 
   useEffect(() => {
     authFetch('http://localhost:8080/api/menu')
-      .then(res => res.json())
-      .then(data => setMenu(data))
-      .catch(err => console.error('Error al cargar menú:', err));
-  }, []);
+  .then(async res => {
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`Error ${res.status}: ${text}`);
+    }
+    return res.json();
+  })
+  .then(data => setMenu(data))
+  .catch(err => {
+    console.error('Error al cargar menú:', err);
+    alert("Tu sesión expiró o no tienes permiso para ver el menú.");
+  });
+});
   
 
   return (
