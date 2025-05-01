@@ -21,6 +21,7 @@ export default function AdminLayout() {
             <span className='text-black'>Admin</span>
           </h1>
           <nav className="space-y-10 text-xl">
+            <Link to="/admin/users" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Lista usuarios</Link>
             <Link to="/admin/menu-promos" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Menu y promociones</Link>
             <Link to="/admin/pedidos" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Pedidos</Link>
             <Link to="/admin/reportes" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Reportes</Link>

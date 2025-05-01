@@ -17,6 +17,7 @@ import Wedding from "../pages/reserves/wedding.jsx";
 // Admin
 import AdminLayout from "../layouts/adminLayout.jsx";
 import DashboardAdmin from "../pages/admin/dashboard.jsx";
+import UsersTable from "../pages/admin/users.jsx";
 import MenuPromosAdmin from "../pages/admin/menupromos.jsx";
 import PedidosAdmin from "../pages/admin/pedidos.jsx";
 import ReportesAdmin from "../pages/admin/Reportes.jsx";
@@ -50,6 +51,7 @@ const AppRouter = () => {
         {/* Admin layout con rutas anidadas */}
         <Route path="/admin" element={<RoleRoute allowedRoles={["admin"]}><AdminLayout /></RoleRoute>}>
           <Route path="dashboard" element={<DashboardAdmin />} />
+          <Route path="users" element={<UsersTable/>}/>
           <Route path="menu-promos" element={<MenuPromosAdmin />} />
           <Route path="pedidos" element={<PedidosAdmin />} />
           <Route path="reportes" element={<ReportesAdmin />} />

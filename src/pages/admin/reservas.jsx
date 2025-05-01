@@ -131,7 +131,7 @@ const ReservasAdmin = () => {
         >
           <option value="todos">Todos</option>
           <option value="cumpleaños">Cumpleaños</option>
-          <option value="boda">Boda</option>
+          <option value="wedding">Boda</option>
           <option value="graduacion">Graduación</option>
         </select>
       </div>
