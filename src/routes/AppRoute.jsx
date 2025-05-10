@@ -13,6 +13,7 @@ import MenuPage from "../pages/menu/MenuPage.jsx";
 import Birthday from "../pages/reserves/birthday.jsx";
 import Graduation from "../pages/reserves/graduation.jsx";
 import Wedding from "../pages/reserves/wedding.jsx";
+import PostUser from "../pages/user/postusers.jsx";
 
 // Admin
 import AdminLayout from "../layouts/adminLayout.jsx";
@@ -48,6 +49,7 @@ const AppRouter = () => {
         <Route path="/birthdayreserve" element={<RoleRoute allowedRoles={["usuario"]}><Birthday /></RoleRoute>} />
         <Route path="/graduationreserve" element={<RoleRoute allowedRoles={["usuario"]}><Graduation /></RoleRoute>} />
         <Route path="/weddingreserve" element={<RoleRoute allowedRoles={["usuario"]}><Wedding /></RoleRoute>} />
+        <Route path="/postusers" element={<RoleRoute allowedRoles={["usuario"]}><PostUser/></RoleRoute>}/>
         {/* Admin layout con rutas anidadas */}
         <Route path="/admin" element={<RoleRoute allowedRoles={["admin"]}><AdminLayout /></RoleRoute>}>
           <Route path="dashboard" element={<DashboardAdmin />} />

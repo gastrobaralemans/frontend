@@ -62,6 +62,9 @@ const Nav = () => {
                     ) : (
                         <>
                             <span className="text-lg font-semibold">{nombre}</span>
+                            <Link to="/postusers" className="flex items-center gap-1 text-gray-700 hover:text-black">
+                                📰
+                            </Link>
                             <button onClick={obtenerNotis} className="relative">
                                 <Bell className="h-6 w-6 text-gray-700 hover:text-black" />
                             </button>
