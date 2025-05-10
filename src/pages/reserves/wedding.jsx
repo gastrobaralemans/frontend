@@ -37,7 +37,7 @@ const Wedding = () => {
       cantidad,
       decoracion,
       comentarios,
-      tipoEvento: 'graduacion'
+      tipoEvento: 'wedding'
     };
     const token = localStorage.getItem('token');
     if (!token) {

@@ -62,6 +62,8 @@ const ReservasAdmin = () => {
             <tr>
               <th className="px-4 py-2">ID</th>
               <th className="px-4 py-2">Nombre</th>
+              <th className="px-4 py-2">Correo</th>
+              <th className="px-4 py-2">Número</th>
               <th className="px-4 py-2">Fecha para:</th>
               <th className="px-4 py-2">Hora</th>
               <th className="px-4 py-2">Cantidad</th>
@@ -80,6 +82,8 @@ const ReservasAdmin = () => {
                 <tr key={reserva.id} className="text-center border-b">
                   <td className="px-4 py-2">{reserva.id}</td>
                   <td className="px-4 py-2">{reserva.nombre}</td>
+                  <td className="px-4 py-2">{reserva.correo}</td>
+                  <td className="px-4 py-2">{reserva.numero}</td>
                   <td className="px-4 py-2">{fecha}</td>
                   <td className="px-4 py-2">{hora}</td>
                   <td className="px-4 py-2">{reserva.cantidad}</td>
