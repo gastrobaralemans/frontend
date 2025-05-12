@@ -14,7 +14,7 @@ import Birthday from "../pages/reserves/birthday.jsx";
 import Graduation from "../pages/reserves/graduation.jsx";
 import Wedding from "../pages/reserves/wedding.jsx";
 import PostUser from "../pages/user/postusers.jsx";
-
+import CarritoPage from "../pages/user/carritopage.jsx";
 // Admin
 import AdminLayout from "../layouts/adminLayout.jsx";
 import DashboardAdmin from "../pages/admin/dashboard.jsx";
@@ -50,6 +50,7 @@ const AppRouter = () => {
         <Route path="/graduationreserve" element={<RoleRoute allowedRoles={["usuario"]}><Graduation /></RoleRoute>} />
         <Route path="/weddingreserve" element={<RoleRoute allowedRoles={["usuario"]}><Wedding /></RoleRoute>} />
         <Route path="/postusers" element={<RoleRoute allowedRoles={["usuario"]}><PostUser/></RoleRoute>}/>
+        <Route path="/carrito" element={<RoleRoute allowedRoles={["usuario"]}><CarritoPage/></RoleRoute>}/>
         {/* Admin layout con rutas anidadas */}
         <Route path="/admin" element={<RoleRoute allowedRoles={["admin"]}><AdminLayout /></RoleRoute>}>
           <Route path="dashboard" element={<DashboardAdmin />} />
