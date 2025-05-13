@@ -27,19 +27,19 @@ const PedidosAdmin = () => {
     return (
     <div className="p-6">
       <h2 className="text-2xl font-semibold mb-4">Pedidos</h2>
-      <table className="w-full border text-left">
+      <table className="w-full text-center">
         <thead className="bg-gray-100">
-          <tr>
+          <tr className="font-bold">
             <th className="p-2"># Pedido</th>
-            <th className="p-2">Fecha</th>
+            <th className="p-2">Fecha del pedido</th>
             <th className="p-2">Estado</th>
             <th className="p-2">Cliente</th>
-            <th className="p-2">Platillos</th>
+            <th className="p-2">Lista de platillos</th>
           </tr>
         </thead>
         <tbody>
           {pedidos.map((p) => (
-            <tr key={p.id} className="border-t">
+            <tr key={p.id} className="border-t border-b">
               <td className="p-2">#{p.id}</td>
               <td className="p-2">{new Date(p.fecha).toLocaleString()}</td>
               <td className="p-2">{p.estado}</td>

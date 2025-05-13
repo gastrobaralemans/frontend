@@ -14,8 +14,8 @@ const MenuCards = ({item}) =>{
         <div className="text-3xl text-center font-bold mb-3">
           {promoPrice ? (
             <>
-              <span className="line-through text-red-400 mr-2">${price.toFixed(2)}</span>
-              <span className="text-green-600">${promoPrice.toFixed(2)}</span>
+              <span className="line-through text-[#740000] mr-2">${price.toFixed(2)}</span>
+              <span className="text-black">${promoPrice.toFixed(2)}</span>
             </>
           ) : (
             <span>${price.toFixed(2)}</span>

@@ -23,8 +23,8 @@ const ModalPlatillo = ({ item, onClose }) => {
         <p className="text-xl font-semibold mb-2">
           {promoPrice ? (
             <>
-              <span className="line-through text-red-500 mr-2">${price.toFixed(2)}</span>
-              <span className="text-green-600">${promoPrice.toFixed(2)}</span>
+              <span className="line-through text-[#740000] mr-2">${price.toFixed(2)}</span>
+              <span className="text-black">${promoPrice.toFixed(2)}</span>
             </>
           ) : (
             <span>${price.toFixed(2)}</span>

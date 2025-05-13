@@ -93,13 +93,13 @@ const ReservasAdmin = () => {
                     <td className="px-4 py-2 space-x-2">
                       <button
                         onClick={() => ActualizarEstado(reserva.id, "aceptar")}
-                        className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                        className="bg-black text-white px-3 py-1"
                       >
                         Aceptar
                       </button>
                       <button
                         onClick={() => ActualizarEstado(reserva.id, "rechazar")}
-                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                        className="bg-black text-white px-3 py-1"
                       >
                         Rechazar
                       </button>

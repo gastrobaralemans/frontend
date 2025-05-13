@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "../../components/auth/button";
+import { Eye } from "lucide-react";
 
 const MenuCardsAdmin = ({ item, abrirModal, abrirPromoInfo }) => {
   const { name, description, imageUrl, price, promoPrice } = item;
@@ -13,10 +14,10 @@ const MenuCardsAdmin = ({ item, abrirModal, abrirPromoInfo }) => {
       <div className="text-3xl text-center font-bold mb-3">
         {promoPrice ? (
           <>
-            <span className="line-through text-red-400 mr-2">${price.toFixed(2)}</span>
-            <span className="text-green-600">${promoPrice.toFixed(2)}</span>
+            <span className="line-through text-[#740000] mr-2">${price.toFixed(2)}</span>
+            <span className="text-black">${promoPrice.toFixed(2)}</span>
             <button onClick={() => abrirPromoInfo(item)} className="absolute top-2 right-2">
-              👁️
+               <Eye className="text-[#740000] w-10 h-10" />
             </button>
           </>
         ) : (
@@ -158,7 +159,7 @@ const PromoInfoModal = ({ item, onClose, abrirModalEditar, eliminarPromo }) => {
           Editar promo
         </Button>
         <Button onClick={() => eliminarPromo(item.id)}>Eliminar promo</Button>
-        <button onClick={onClose} className="mt-2 text-red-700 w-full">Cerrar</button>
+        <button onClick={onClose} className="mt-2 text-[#740000] w-full">Cerrar</button>
       </div>
     </div>
   );
@@ -220,7 +221,7 @@ const MenuPromosAdmin = () => {
         placeholder="Buscar..."
         value={busqueda}
         onChange={(e) => setBusqueda(e.target.value)}
-        className="border rounded px-4 py-2 w-full mb-6"
+        className="border px-4 py-2 w-full mb-6"
       />
       {filtrado.length > 0 ? (
         filtrado.map((category, index) => (

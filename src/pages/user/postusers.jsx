@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Button from "../../components/auth/button";
 
 const PostUser = () => {
     const [posts, setPosts] = useState([]);
@@ -82,63 +83,66 @@ const PostUser = () => {
     };
 
     return (
-        <div className="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {Array.isArray(posts) && posts.length > 0 ? (
-                posts.map((post) => (
-                    <div key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
-                        <h4 className="text-lg font-bold px-4 pt-4">{post.titulo}</h4>
-                        {post.imagen && (
-                            <img
-                                src={post.imagen}
-                                alt={post.titulo}
-                                className="w-full h-60 object-cover"
-                            />
+        <div className="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 place-items-center">
+    {Array.isArray(posts) && posts.length > 0 ? (
+        posts.map((post) => (
+            <div
+                key={post.id}
+                className="bg-white border overflow-hidden flex flex-col w-full max-w-[300px]"
+            >
+                <h4 className="text-lg text-[#740000] font-bold px-4 pt-4">{post.titulo}</h4>
+                {post.imagen && (
+                    <img
+                        src={post.imagen}
+                        alt={post.titulo}
+                        className="w-full h-48 object-cover"
+                    />
+                )}
+                <div className="px-4 py-3">
+                    <p className="text-gray-700 text-sm mb-4">{post.descripcion}</p>
+
+                    <form onSubmit={(e) => enviarComentario(e, post.id)} className="mb-3">
+                        <input
+                            type="text"
+                            placeholder="Escribe un comentario..."
+                            value={nuevoComentario[post.id] || ""}
+                            onChange={(e) =>
+                                setNuevoComentario((prev) => ({
+                                    ...prev,
+                                    [post.id]: e.target.value,
+                                }))
+                            }
+                            className="w-full border px-3 py-2 mb-2 text-sm"
+                            required
+                        />
+                        <Button
+                            type="submit"
+                        >
+                            Comentar
+                        </Button>
+                    </form>
+
+                    <div>
+                        <h5 className="font-semibold text-sm mb-2">Comentarios:</h5>
+                        {comentarios[post.id] && comentarios[post.id].length > 0 ? (
+                            comentarios[post.id].map((comentario) => (
+                                <div key={comentario.id} className="border-b py-1 text-sm">
+                                    <strong>{comentario.usuarioNombre}:</strong> {comentario.contenido}
+                                    <div className="text-xs text-gray-500">{new Date(comentario.fecha).toLocaleString()}</div>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="text-sm text-gray-500">Sin comentarios aún.</p>
                         )}
-                        <div className="px-4 py-3">
-                            <p className="text-gray-700 text-sm mb-4">{post.descripcion}</p>
-    
-                            <form onSubmit={(e) => enviarComentario(e, post.id)} className="mb-3">
-                                <input
-                                    type="text"
-                                    placeholder="Escribe un comentario..."
-                                    value={nuevoComentario[post.id] || ""}
-                                    onChange={(e) =>
-                                        setNuevoComentario((prev) => ({
-                                            ...prev,
-                                            [post.id]: e.target.value,
-                                        }))
-                                    }
-                                    className="w-full border px-3 py-2 rounded mb-2"
-                                    required
-                                />
-                                <button
-                                    type="submit"
-                                    className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-sm"
-                                >
-                                    Comentar
-                                </button>
-                            </form>
-    
-                            <div>
-                                <h5 className="font-semibold text-sm mb-2">Comentarios:</h5>
-                                {comentarios[post.id] && comentarios[post.id].length > 0 ? (
-                                    comentarios[post.id].map((comentario) => (
-                                        <div key={comentario.id} className="border-b py-1 text-sm">
-                                            <strong>{comentario.usuarioNombre}:</strong> {comentario.contenido}
-                                            <div className="text-xs text-gray-500">{new Date(comentario.fecha).toLocaleString()}</div>
-                                        </div>
-                                    ))
-                                ) : (
-                                    <p className="text-sm text-gray-500">Sin comentarios aún.</p>
-                                )}
-                            </div>
-                        </div>
                     </div>
-                ))
-            ) : (
-                <p className="text-center text-gray-500 col-span-full">No hay publicaciones.</p>
-            )}
-        </div>
+                </div>
+            </div>
+        ))
+    ) : (
+        <p className="text-center text-gray-500 col-span-full">No hay publicaciones.</p>
+    )}
+</div>
+
     );
     
 };

@@ -60,29 +60,29 @@ const PostAdmin = () => {
             <h2 className="text-2xl font-semibold mb-4">Publicaciones</h2>
             <form onSubmit={crearPost}>
                 <div className="mb-4">
-                    <label className="block font-semibold mb-1 text-[#740000]">Título</label>
                     <input
                         type="text"
                         value={titulo}
+                        placeholder="Titulo del post"
                         onChange={(e) => setTitulo(e.target.value)}
                         className="w-full border px-3 py-2"
                         required
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block font-semibold mb-1 text-[#740000]">Insertar URL de imagen</label>
                     <input
                         type="text"
                         value={imagen}
+                        placeholder="Insertar URL de imagen"
                         onChange={(e) => setImagen(e.target.value)}
                         className="w-full border px-3 py-2"
                         required
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block font-semibold mb-1 text-[#740000]">Descripción</label>
                     <textarea
                         value={descripcion}
+                        placeholder="Descripción"
                         onChange={(e) => setDescripcion(e.target.value)}
                         className="w-full border px-3 py-2"
                         required
@@ -96,11 +96,11 @@ const PostAdmin = () => {
                 {Array.isArray(posts) && posts.length === 0 ? (
                     <p>No hay publicaciones aún.</p>
                 ) : (
-                    <div className="flex overflow-x-auto space-x-4 pb-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 place-items-center">
                         {posts.map((post) => (
                             <div
                                 key={post.id}
-                                className="min-w-[250px] max-w-xs bg-white rounded-lg shadow-md overflow-hidden flex-shrink-0 hover:shadow-lg transition-shadow"
+                                className="bg-white border shadow-md overflow-hidden max-w-xs w-full"
                             >
                                 <h4 className="text-lg font-bold px-4 pt-4">{post.titulo}</h4>
                                 {post.imagen && (

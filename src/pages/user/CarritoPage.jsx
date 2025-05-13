@@ -34,7 +34,7 @@ const CarritoPage = () => {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-6 text-center">🛒 Tu Carrito</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center">Tu Carrito</h2>
       {items.length === 0 ? (
         <p className="text-center">No hay platillos en tu carrito.</p>
       ) : (
