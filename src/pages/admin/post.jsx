@@ -107,7 +107,7 @@ const PostAdmin = () => {
                                     <img
                                         src={post.imagen}
                                         alt={post.titulo}
-                                        className="w-full h-48 object-cover"
+                                        className="w-full h-48 object-fit"
                                     />
                                 )}
                                 <div className="px-4 py-3">

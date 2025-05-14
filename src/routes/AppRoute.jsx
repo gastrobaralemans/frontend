@@ -14,7 +14,7 @@ import Birthday from "../pages/reserves/birthday.jsx";
 import Graduation from "../pages/reserves/graduation.jsx";
 import Wedding from "../pages/reserves/wedding.jsx";
 import PostUser from "../pages/user/postusers.jsx";
-import CarritoPage from "../pages/user/carritopage.jsx";
+import CarritoPage from "../pages/user/CarritoPage.jsx";
 // Admin
 import AdminLayout from "../layouts/adminLayout.jsx";
 import DashboardAdmin from "../pages/admin/dashboard.jsx";
@@ -30,7 +30,7 @@ import PostAdmin from "../pages/admin/post.jsx";
 import CocineroLayout from "../layouts/cocineroLayout.jsx";
 import DashboardCocinero from "../pages/cocinero/dashboard.jsx";
 import InventarioIngredientesCocinero from "../pages/cocinero/inventario.jsx";
-import PedidosPreparacionCocinero from "../pages/cocinero/PedidosPreparacion.jsx";
+import PedidosCocinero from "../pages/cocinero/PedidosCocinero.jsx";
 
 //mesero
 import MeseroLayout from "../layouts/meseroLayout.jsx";
@@ -66,7 +66,7 @@ const AppRouter = () => {
         <Route path="/cocinero" element={<RoleRoute allowedRoles={["cocinero"]}><CocineroLayout /></RoleRoute>}>
           <Route path="dashboard" element={<DashboardCocinero />} />
           <Route path="inventario-cocinero" element={<InventarioIngredientesCocinero />} />
-          <Route path="pedidos-preparacion" element={<PedidosPreparacionCocinero />} />
+          <Route path="pedidos-cocinero" element={<PedidosCocinero />} />
         </Route>
         {/* Mesero layout con rutas anidadas */}
         <Route path="/mesero" element={<RoleRoute allowedRoles={["mesero"]}><MeseroLayout /></RoleRoute>}>

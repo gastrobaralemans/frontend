@@ -32,7 +32,7 @@ const UsersTable = () =>{
     return(
         <>
             <div>
-                <h2 className="text-2xl font-semibold mb-4">Vista de usuarios registrados en Gastrobar Aleman's </h2>
+                <h2 className="text-2xl font-semibold mb-4">Vista de usuarios registrados </h2>
                 <div className="mb-6">
                     <label className="font-semibold mr-3">Filtrar por rol:</label>
                     <select

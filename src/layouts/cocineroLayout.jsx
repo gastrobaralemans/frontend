@@ -21,7 +21,7 @@ export default function CocineroLayout() {
             <span className='text-black'>Cocinero</span>
           </h1>
           <nav className="space-y-10 text-xl">
-            <Link to="/cocinero/pedidos-preparacion" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Ver pedidos en preparacion</Link>
+            <Link to="/cocinero/pedidos-cocinero" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Pedidos</Link>
             <Link to="/cocinero/inventario-cocinero" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Inventario de ingredientes</Link>
             <button onClick={handleLogout} className="text-left w-full pl-5 hover:text-[#7A0000] hover:font-bold">Cerrar sesión</button>
           </nav>

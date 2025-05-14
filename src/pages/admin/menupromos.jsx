@@ -218,7 +218,7 @@ const MenuPromosAdmin = () => {
       <h2 className="text-2xl font-bold mb-6">Menú y Promociones</h2>
       <input
         type="text"
-        placeholder="Buscar..."
+        placeholder="Buscar categoría o nombre del platillo..."
         value={busqueda}
         onChange={(e) => setBusqueda(e.target.value)}
         className="border px-4 py-2 w-full mb-6"
