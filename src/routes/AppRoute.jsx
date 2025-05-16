@@ -24,6 +24,7 @@ import PedidosAdmin from "../pages/admin/pedidos.jsx";
 import ReportesAdmin from "../pages/admin/Reportes.jsx";
 import ReservasAdmin from "../pages/admin/reservas.jsx";
 import InventarioAdmin from "../pages/admin/inventario.jsx";
+import AsociarIngredientes from "../pages/admin/receta.jsx";
 import PostAdmin from "../pages/admin/post.jsx";
 
 //Cocineroo
@@ -60,6 +61,7 @@ const AppRouter = () => {
           <Route path="reportes" element={<ReportesAdmin />} />
           <Route path="reservas" element={<ReservasAdmin />} />
           <Route path="inventario" element={<InventarioAdmin />} />
+          <Route path="receta" element={<AsociarIngredientes/>}/>
           <Route path="post" element={<PostAdmin />} />
         </Route>
         {/* Cocinero layout con rutas anidadas */}
