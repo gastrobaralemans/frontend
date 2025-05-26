@@ -1,5 +1,6 @@
 import { useCarrito } from "../../components/context/CarritoContext";
 import { useNavigate } from "react-router-dom";
+import {toast} from "sonner"
 
 const CarritoPage = () => {
   const { items, cambiarCantidad, quitarDelCarrito, total, vaciar } = useCarrito();
@@ -23,11 +24,11 @@ const CarritoPage = () => {
     });
 
     if (!res.ok) {
-      alert("Error al enviar pedido");
+      toast.error("Error al enviar pedido");
       return;
     }
 
-    alert("Pedido enviado con éxito");
+    toast.success("Pedido enviado con éxito");
     vaciar();
     navigate("/");
   };
@@ -55,8 +56,11 @@ const CarritoPage = () => {
                   className="border px-2 py-1 w-16"
                 />
                 <button
-                  onClick={() => quitarDelCarrito(item.id)}
-                  className="text-red-600 hover:underline"
+                  onClick={() => {
+                    quitarDelCarrito(item.id);
+                    toast.info(`"${item.name}" fue removido del carrito`);
+                  }}
+                  className="text-[#740000] hover:underline"
                 >
                   Quitar
                 </button>
@@ -68,7 +72,7 @@ const CarritoPage = () => {
           </div>
           <button
             onClick={enviarPedido}
-            className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+            className="w-full bg-black text-white py-2"
           >
             Enviar Pedido
           </button>

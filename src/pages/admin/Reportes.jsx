@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import html2pdf from "html2pdf.js";
+import {toast} from "sonner"
+
 
 const ReportesAdmin = () => {
   const [reportes, setReportes] = useState([]);
@@ -21,7 +23,7 @@ const ReportesAdmin = () => {
       setReportes(pedidosEntregados);
     } catch (error) {
       console.error("Error al cargar reportes", error);
-      alert("No se pudieron cargar los reportes.");
+      toast.error("No se pudieron cargar los reportes.");
     }
   };
 

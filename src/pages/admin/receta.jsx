@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import {toast} from "sonner"
+
 
 const AsociarIngredientes = () => {
   const [platillos, setPlatillos] = useState([]);
@@ -62,7 +64,7 @@ const AsociarIngredientes = () => {
     );
 
     if (yaAsociado) {
-      alert("Este ingrediente ya está asociado a este platillo.");
+      toast.error("Este ingrediente ya está asociado a este platillo.");
       return;
     }
  console.log("Enviando receta:", formulario);

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import {toast}from "sonner"
 
 const PedidosCocinero = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -15,7 +16,7 @@ const PedidosCocinero = () => {
       setPedidos(response.data);
     } catch (error) {
       console.error("Error al cargar pedidos", error);
-      alert("No se pudieron cargar los pedidos.");
+      toast.error("No se pudieron cargar los pedidos.");
     }
   };
 
@@ -30,7 +31,7 @@ const PedidosCocinero = () => {
       fetchPedidos();
     } catch (error) {
       console.error("Error al marcar en preparación", error);
-      alert("No se pudo actualizar el pedido.");
+      toast.error("No se pudo actualizar el pedido.");
     }
   };
 
@@ -45,7 +46,7 @@ const PedidosCocinero = () => {
       fetchPedidos();
     } catch (error) {
       console.error("Error al marcar como listo", error);
-      alert("No se pudo actualizar el pedido.");
+      toast.error("No se pudo actualizar el pedido.");
     }
   };
 

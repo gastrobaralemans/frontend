@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "../../components/auth/button";
 import { Eye } from "lucide-react";
+import {toast} from "sonner"
 
 const MenuCardsAdmin = ({ item, abrirModal, abrirPromoInfo }) => {
   const { name, description, imageUrl, price, promoPrice } = item;
@@ -40,30 +41,30 @@ const PromoModal = ({ item, onClose, fetchMenu }) => {
   const [promoDescription, setPromoDescription] = useState(item.promoDescription || "");
   const Validate = () =>{
     if (!promoPrice || isNaN(promoPrice) || Number(promoPrice) <= 0) {
-      alert("el precio tiene q ser positivo");
+      toast.error("El precio tiene que ser positivo");
       return false;
   }
   if (Number(promoPrice) >= item.price) {
-    alert(`El precio de promo no puede ser mayor o igual a $${item.price}.`);
+    toast.error(`El precio de promo no puede ser mayor o igual a $${item.price}`);
     return false;
   }
   if (!startDate || !endDate) {
-    alert("fechason obligatorias.");
+    toast.error("Las fechas son obligatorias");
     return false;
   }
   const now = new Date();
     const start = new Date(startDate);
     const end = new Date(endDate);
     if (start < now) {
-      alert("la start date no puede ser anterior a ahora");
+      toast.error("La fecha de inicio no puede ser anterior a ahora");
       return false;
     }
     if (end < start) {
-      alert("end date no debe ser anterior a la fecha de inicio.");
+      toast.error("La fecha de fin no debe ser anterior a la fecha de inicio");
       return false;
     }
     if (!promoDescription.trim()) {
-      alert("campo obligatorio");
+      toast.error("Descripción obligatoria");
       return false;
     }
     return true;
@@ -89,17 +90,17 @@ const PromoModal = ({ item, onClose, fetchMenu }) => {
       });
 
       if (!response.ok) {
-        alert(`Error del servidor: ${response.status}`);
+        toast.error(`Error del servidor: ${response.status}`);
         return;
       }
 
       const text = await response.text();
-      alert(text);
+      toast.success(text);
       await fetchMenu();
       onClose();;
     } catch (error) {
       console.error("Error al agregar promo", error);
-      alert("No se ha podido enviar la promo");
+      toast.error("No se ha podido enviar la promo");
     }
   };
 
@@ -193,12 +194,12 @@ const MenuPromosAdmin = () => {
       await axios.delete(`http://localhost:8080/api/menu/${id}/promo`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      alert("Promo eliminada");
+      toast.success("Promo eliminada");
       setPromoInfoItem(null);
       fetchMenu();
     } catch (error) {
       console.error("Error al eliminar promo", error.response);
-      alert(`Error al eliminar promo: ${error.response?.data || "Error desconocido"}`);
+      toast.error(`Error al eliminar promo: ${error.response?.data || "Error desconocido"}`);
     }
   };
   

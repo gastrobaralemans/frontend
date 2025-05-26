@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Bell, ShoppingCart } from "lucide-react";
+import { Bell, ShoppingCart, FileText } from "lucide-react";
 import Button from "../components/auth/button";
 import CarritoModal from "../components/carrito/CarritoModal";
 
@@ -60,7 +60,7 @@ const Nav = () => {
               <span className="text-lg font-semibold">{nombre}</span>
 
               <Link to="/postusers" className="flex items-center gap-1 text-gray-700 hover:text-black">
-                📰
+                <FileText className="h-6 w-6"/>
               </Link>
 
               <Link

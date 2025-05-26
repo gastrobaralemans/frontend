@@ -1,5 +1,6 @@
 import React from "react";
 import {useCarrito} from "../context/CarritoContext";
+import {toast} from "sonner"
 
 const CarritoModal = ({ onClose }) => {
   const { items, cambiarCantidad, quitarDelCarrito, total, vaciar } = useCarrito();
@@ -12,23 +13,27 @@ const CarritoModal = ({ onClose }) => {
       metodoPago: "Efectivo"
     };
 
-    const res = await fetch("http://localhost:8080/api/pedidos", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify(body),
-    });
+     try {
+      const res = await fetch("http://localhost:8080/api/pedidos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(body),
+      });
 
-    if (!res.ok) {
-      alert("Error al enviar pedido");
-      return;
+      if (!res.ok) {
+        toast.error("Error al enviar pedido");
+        return;
+      }
+
+      toast.success("Pedido enviado");
+      vaciar();
+      onClose();
+    } catch (error) {
+      toast.error("Error de conexión con el servidor");
     }
-
-    alert("Pedido enviado");
-    vaciar();
-    onClose();
   };
 
   return (
@@ -52,11 +57,11 @@ const CarritoModal = ({ onClose }) => {
                     className="w-12 border px-1"
                   />
                 </p>
-                <button onClick={() => quitarDelCarrito(item.id)} className="text-red-600">Quitar</button>
+                <button onClick={() => quitarDelCarrito(item.id)} className="text-[#740000]">Quitar</button>
               </div>
             ))}
             <p className="font-bold">Total: ${total.toFixed(2)}</p>
-            <button onClick={enviarPedido} className="w-full bg-green-600 text-white py-2 mt-4">Enviar Pedido</button>
+            <button onClick={enviarPedido} className="w-full bg-black text-white py-2 mt-4">Enviar Pedido</button>
           </>
         )}
         <button onClick={onClose} className="mt-4 w-full bg-black text-white py-2">Cerrar</button>

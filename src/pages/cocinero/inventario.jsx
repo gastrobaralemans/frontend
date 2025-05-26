@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import {toast} from "sonner"
 
 const InventarioCocinero = () => {
   const [ingredientes, setIngredientes] = useState([]);
@@ -14,7 +15,7 @@ const InventarioCocinero = () => {
       setIngredientes(response.data);
     } catch (error) {
       console.error("Error al cargar inventario", error);
-      alert("No se pudo cargar el inventario.");
+      toast.error("No se pudo cargar el inventario.");
     }
   };
 

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import {toast} from "sonner"
+
 
 const ReservasAdmin = () => {
   const [todas, setTodas] = useState([]);
@@ -12,7 +14,7 @@ const ReservasAdmin = () => {
   const obtenerReservas = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("Sesión expirada o no autenticado.");
+      toast.error("Sesión expirada.");
       return;
     }
 
@@ -32,7 +34,7 @@ const ReservasAdmin = () => {
   const ActualizarEstado = async (id, accion) => {
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("expiro sesion o no autenticado.");
+      toast.error("Sesión expirada.");
       return;
     }
 

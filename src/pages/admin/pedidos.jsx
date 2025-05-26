@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import {toast} from "sonner"
 
 const PedidosAdmin = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -16,7 +17,7 @@ const PedidosAdmin = () => {
       setPedidos(response.data);
     } catch (error) {
       console.error("Error al cargar pedidos", error);
-      alert("No se pudieron cargar los pedidos.");
+      toast.error("No se pudieron cargar los pedidos.");
     }
   };
 
@@ -38,7 +39,7 @@ const PedidosAdmin = () => {
       setPedidos(actualizado);
     } catch (error) {
       console.error("Error al marcar como entregado", error);
-      alert("No se pudo marcar como entregado.");
+      toast.error("No se pudo marcar como entregado.");
     }
   };
 

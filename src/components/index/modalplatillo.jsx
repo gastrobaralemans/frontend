@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import {useCarrito} from "../context/CarritoContext"
+import { toast } from "sonner";
+
 
 const ModalPlatillo = ({ item, onClose }) => {
   if (!item) return null;
@@ -9,10 +11,12 @@ const ModalPlatillo = ({ item, onClose }) => {
   const { agregarAlCarrito } = useCarrito();
 
   const handleAgregar = () => {
-    console.log("Agregando:", item.name, cantidad);
-    agregarAlCarrito({ ...item, cantidad });
-    onClose();
-  };
+  console.log("Agregando:", item.name, cantidad);
+  agregarAlCarrito({ ...item, cantidad });
+  toast.success(`"${item.name}" añadido al carrito (${cantidad}) items`);
+  onClose();
+};
+
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -44,14 +48,14 @@ const ModalPlatillo = ({ item, onClose }) => {
 
         <button
           onClick={handleAgregar}
-          className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded mb-2"
+          className="w-full bg-black text-white py-2"
         >
           Añadir al carrito
         </button>
 
         <button
           onClick={onClose}
-          className="w-full bg-black text-white py-2 rounded"
+          className="w-full bg-black text-white py-2"
         >
           Cerrar
         </button>

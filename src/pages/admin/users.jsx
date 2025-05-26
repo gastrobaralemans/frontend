@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import {toast} from "sonner"
 const UsersTable = () =>{
     const [personas, setPersonas] = useState([]);
     const [rolFiltro, setRolFiltro] = useState("todos");
@@ -10,7 +11,7 @@ const UsersTable = () =>{
       const obtenerPersonas = async () => {
         const token = localStorage.getItem("token");
         if (!token) {
-          alert("Sesión expirada o no autenticado.");
+          toast.error("Sesión expirada.");
           return;
         }
         try {

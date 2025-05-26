@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import {toast} from "sonner"
 
 const PedidosMesero = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -44,11 +45,11 @@ const PedidosMesero = () => {
       headers: { Authorization: `Bearer ${token}` }
     });
 
-    alert("Pedido registrado con éxito");
+    toast.success("Pedido registrado con éxito");
     setSeleccionados([]);
   } catch (error) {
     console.error("Error enviando pedido", error);
-    alert("Error enviando pedido: " + (error.response?.data || "ver consola"));
+    toast.error("Error enviando pedido: " + (error.response?.data || "ver consola"));
   }
 };
 
