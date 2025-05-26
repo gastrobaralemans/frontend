@@ -24,6 +24,11 @@ const AsociarIngredientes = () => {
       setPlatillos(res.data);
     } catch (error) {
       console.error("Error cargando platillos", error);
+       if (error.response?.status === 401) {
+      toast.error("Sesión expirada.");
+    } else {
+      toast.error("No se pudieron cargar los platillos.");
+    }
     }
   };
 
@@ -33,8 +38,14 @@ const AsociarIngredientes = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setIngredientes(res.data);
+      console.log("Ingredientes recibidos:", res.data);
     } catch (error) {
       console.error("Error cargando ingredientes", error);
+       if (error.response?.status === 401) {
+      toast.error("Sesión expirada.");
+    } else {
+      toast.error("No se pudieron cargar los ingredientes");
+    }
     }
   };
 
@@ -49,12 +60,22 @@ const AsociarIngredientes = () => {
       console.log("Recetas cargadas:", res.data);
     } else {
       console.error("Respuesta inesperada:", res.data);
+      toast.error("Error al procesar la receta.");
       setRecetas([]); 
     }
 
   } catch (error) {
     console.error("Error cargando receta", error);
     setRecetas([]);
+    if(error.response){
+            if(error.response.status===401){
+              toast.error("sesión expirada")
+            }else{
+              toast.error("error al cargar recetas")
+            }
+          }else{
+            toast.error("sin respuesta del servidor")
+          }
   }
 };
 
@@ -80,8 +101,18 @@ const AsociarIngredientes = () => {
       );
       fetchReceta(formulario.platilloId);
       setFormulario({ ...formulario, ingredienteId: "", cantidadRequerida: "" });
+      toast.success("Ingrediente asociado");
     } catch (error) {
       console.error("Error asociando ingrediente", error);
+      if(error.response){
+              if(error.response.status===401){
+                toast.error("sesión expirada")
+              }else{
+                toast.error("no se pudo asociar el ingrediente")
+              }
+            }else{
+              toast.error("sin respuesta del servidor")
+            }
     }
   };
 
@@ -178,14 +209,14 @@ useEffect(() => {
             <tbody>
               {recetas.map((r) => {
                 const disponible = r.ingrediente.cantidadDisponible;
-                const estado = disponible <= (r.ingrediente.stockMinimo || 5) ? "Bajo Stock" : "Ok";
+                const estado = disponible < r.cantidadRequerida ? "Insuficiente" : "Ok";
                 return (
                   <tr key={r.id} className="border-t border-b">
                     <td className="p-2 border">{r.ingrediente.nombre}</td>
                     <td className="p-2 border">{r.cantidadRequerida}</td>
                     <td className="p-2 border">{disponible}</td>
-                    <td className={`p-2 border ${estado === "Bajo Stock" ? "text-[#740000] font-bold" : "text-green-600"}`}>
-                      {estado === "Bajo Stock" ? "Bajo Stock" : "Ok"}
+                    <td className={`p-2 font-bold ${estado === "Insuficiente" ? "text-[#740000]" : "text-green-600"}`}>
+                      {estado}
                     </td>
                   </tr>
                 );

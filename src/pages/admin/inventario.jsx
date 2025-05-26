@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "sonner";
 
 const InventarioAdmin = () => {
   const [ingredientes, setIngredientes] = useState([]);
@@ -15,7 +16,17 @@ const InventarioAdmin = () => {
       setIngredientes(response.data);
     } catch (error) {
       console.error("Error al cargar ingredientes", error);
-    }
+      if(error.response){
+        if(error.response.status===401){
+          toast.error("sesión expirada")
+        }else{
+          toast.error("error al cargar ingredientes")
+        }
+      }else{
+        toast.error("sin respuesta del servidor")
+      }
+      
+  }
   };
 
   const agregarIngrediente = async () => {
@@ -25,8 +36,19 @@ const InventarioAdmin = () => {
       });
       setNuevo({ nombre: "", cantidadDisponible: "" });
       fetchIngredientes();
+       toast.success("Ingrediente agregado");
     } catch (error) {
       console.error("Error al agregar", error);
+      if(error.response){
+        if(error.response.status===401){
+          toast.error("sesión expirada")
+        }else{
+          toast.error("error al agregar ingredientes")
+        }
+      }else{
+        toast.error("sin respuesta del servidor")
+      }
+      
     }
   };
 
@@ -39,21 +61,49 @@ const InventarioAdmin = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       fetchIngredientes();
+      toast.success("Ingrediente actualizado");
     } catch (error) {
       console.error("Error al actualizar", error);
+      if(error.response){
+        if(error.response.status===401){
+          toast.error("sesión expirada")
+        }else{
+          toast.error("error al actualizar ingredientes")
+        }
+      }else{
+        toast.error("sin respuesta del servidor")
+      }
     }
   };
 
   const eliminarIngrediente = async (id) => {
-    if (!confirm("¿Seguro que querés eliminar este ingrediente?")) return;
-    try {
-      await axios.delete(`http://localhost:8080/api/ingredientes/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      fetchIngredientes();
-    } catch (error) {
-      console.error("Error al eliminar", error);
-    }
+    const ing = ingredientes.find((i) => i.id === id);
+    toast.warning("¿Seguro que querés eliminar este ingrediente?", {
+      description: `Ingrediente: ${ing.nombre}`,
+      action: {
+        label: "Sí, eliminar",
+        onClick: async () => {
+          try {
+            await axios.delete(`http://localhost:8080/api/ingredientes/${id}`, {
+              headers: { Authorization: `Bearer ${token}` }
+            });
+            fetchIngredientes();
+            toast.success("Ingrediente eliminado");
+          } catch (error) {
+            console.error("Error al eliminar", error);
+            if(error.response){
+        if(error.response.status===401){
+          toast.error("sesión expirada")
+        }else{
+          toast.error("error al eiminar ingredientes")
+        }
+      }else{
+        toast.error("sin respuesta del servidor")
+      }
+          }
+        }
+      }
+    });
   };
 
   useEffect(() => {
@@ -63,8 +113,6 @@ const InventarioAdmin = () => {
   return (
     <div className="p-6">
       <h2 className="text-2xl font-semibold mb-4">Inventario</h2>
-
-      {/* Agregar ingrediente */}
       <div className="mb-6 flex gap-4">
         <input
           type="text"
@@ -109,7 +157,20 @@ const InventarioAdmin = () => {
                   {ing.cantidadDisponible <= (ing.stockMinimo || 5) ? 'Bajo Stock' : 'Ok'}
                 </span>
               </td>
-              <td className="p-2 border">
+                  <td className="p-2 flex items-center justify-center gap-2">
+                <input
+                  type="number"
+                  value={ing.cantidadDisponible}
+                  onChange={(e) => {
+                    const nuevaCantidad = parseInt(e.target.value, 10);
+                    setIngredientes((prev) =>
+                      prev.map((item) =>
+                        item.id === ing.id ? { ...item, cantidadDisponible: nuevaCantidad } : item
+                      )
+                    );
+                  }}
+                  className="border px-2 py-1 w-24 text-center"
+                />
                 <button
                   onClick={() => actualizarIngrediente(ing.id, ing.cantidadDisponible)}
                   className="bg-black text-white px-3 py-1"
@@ -117,6 +178,8 @@ const InventarioAdmin = () => {
                   Guardar
                 </button>
               </td>
+
+    
               <td className="p-2 border">
                 <button
                   onClick={() => eliminarIngrediente(ing.id)}
