@@ -29,11 +29,6 @@ const Graduation = () => {
   
   const handleReserveGraduation = async (e) => {
     e.preventDefault();
-    if (!numero || !fecha || !cantidad || !decoracion || !comentarios) {
-      toast.error('Campos obligatorios');
-      return;
-    }
-
     const data = {
       numero,
       fecha,
@@ -56,9 +51,20 @@ const Graduation = () => {
         },
         body: JSON.stringify(data)
       });
-
-      const text = await response.text();
-      toast.success(text);
+      if(!response.ok){
+        if(response.status===400){
+          const errorData=await response.json();
+          Object.entries(errorData).forEach(([campo,mensaje])=>{
+            toast.error(`${campo}: ${mensaje}`);
+          });
+        }else{
+          const text=await response.text();
+          toast.error(text)
+        }
+      }else{
+        const text=await response.text();
+          toast.success(text)
+      }
     } catch (error) {
       console.error(error);
       toast.error('No se ha podido enviar la solicitud');

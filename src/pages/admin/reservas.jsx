@@ -27,7 +27,7 @@ const ReservasAdmin = () => {
 
       setTodas(response.data);
     } catch (error) {
-      console.error("error en obtener las reservas", error);
+      console.error(error);
     }
   };
 
@@ -54,6 +54,7 @@ const ReservasAdmin = () => {
   const pendientes = filtradas.filter((r) => r.estado === "pendiente");
   const aceptadas = filtradas.filter((r) => r.estado === "aceptado");
   const rechazadas = filtradas.filter((r) => r.estado === "rechazado");
+  
 
   const TablaReservas = ({ titulo, reservas, mostrarAcciones }) => (
     <div className="mb-8">
@@ -126,8 +127,6 @@ const ReservasAdmin = () => {
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-6">Lista de reservas</h2>
-
-      {/* Filtro por tipo */}
       <div className="mb-6">
         <label className="font-semibold mr-3">Filtrar por tipo de evento:</label>
         <select
@@ -137,7 +136,7 @@ const ReservasAdmin = () => {
         >
           <option value="todos">Todos</option>
           <option value="cumpleaños">Cumpleaños</option>
-          <option value="wedding">Boda</option>
+          <option value="boda">Boda</option>
           <option value="graduacion">Graduación</option>
         </select>
       </div>

@@ -1,6 +1,12 @@
-@import "tailwindcss";
 @import "flowbite/src/themes/default";
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
 
-* {
-    font-family: 'Comfortaa';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Comfortaa', sans-serif;
   }
+}

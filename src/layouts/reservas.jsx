@@ -53,7 +53,16 @@ const ReservasCards = () => {
                         <div className="mt-6">
                             <Button
                                 className="bg-black text-white w-full"
-                                onClick={() => navigate(event.path)}
+                                
+                                onClick={() => {
+                                    const token = localStorage.getItem('token');
+                                    if(token){
+                                        navigate(event.path);
+                                    }else{
+                                        navigate('/register')
+                                    }
+                                }
+                                }
                             >
                                 Reservar ahora
                             </Button>

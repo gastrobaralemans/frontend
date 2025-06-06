@@ -1,9 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-//routes
-import PrivateRoute from "./PrivateRoute.jsx";
 import RoleRoute from "./RoleRoute.jsx";
 import PublicOnlyRoute from "./publicsRoutes.jsx";
+import RoleRouteRegister from "./RoleRouteRegister.jsx";
 
 //user
 import Home from "../pages/Index.jsx";
@@ -46,13 +44,12 @@ const AppRouter = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<PublicOnlyRoute><Login /></PublicOnlyRoute>} />
         <Route path="/register" element={<PublicOnlyRoute><Register /></PublicOnlyRoute>} />
-        <Route path="/menu" element={<RoleRoute allowedRoles={["usuario"]}><MenuPage /></RoleRoute>} />
-        <Route path="/birthdayreserve" element={<RoleRoute allowedRoles={["usuario"]}><Birthday /></RoleRoute>} />
-        <Route path="/graduationreserve" element={<RoleRoute allowedRoles={["usuario"]}><Graduation /></RoleRoute>} />
-        <Route path="/weddingreserve" element={<RoleRoute allowedRoles={["usuario"]}><Wedding /></RoleRoute>} />
-        <Route path="/postusers" element={<RoleRoute allowedRoles={["usuario"]}><PostUser/></RoleRoute>}/>
-        <Route path="/carrito" element={<RoleRoute allowedRoles={["usuario"]}><CarritoPage/></RoleRoute>}/>
-        {/* Admin layout con rutas anidadas */}
+        <Route path="/menu" element={<RoleRouteRegister allowedRoles={["usuario"]}><MenuPage /></RoleRouteRegister>} />
+        <Route path="/birthdayreserve" element={<RoleRouteRegister allowedRoles={["usuario"]}><Birthday /></RoleRouteRegister>} />
+        <Route path="/graduationreserve" element={<RoleRouteRegister allowedRoles={["usuario"]}><Graduation /></RoleRouteRegister>} />
+        <Route path="/weddingreserve" element={<RoleRouteRegister allowedRoles={["usuario"]}><Wedding /></RoleRouteRegister>} />
+        <Route path="/postusers" element={<RoleRouteRegister allowedRoles={["usuario"]}><PostUser/></RoleRouteRegister>}/>
+        <Route path="/carrito" element={<RoleRouteRegister allowedRoles={["usuario"]}><CarritoPage/></RoleRouteRegister>}/>
         <Route path="/admin" element={<RoleRoute allowedRoles={["admin"]}><AdminLayout /></RoleRoute>}>
           <Route path="dashboard" element={<DashboardAdmin />} />
           <Route path="users" element={<UsersTable/>}/>
@@ -64,13 +61,11 @@ const AppRouter = () => {
           <Route path="receta" element={<AsociarIngredientes/>}/>
           <Route path="post" element={<PostAdmin />} />
         </Route>
-        {/* Cocinero layout con rutas anidadas */}
         <Route path="/cocinero" element={<RoleRoute allowedRoles={["cocinero"]}><CocineroLayout /></RoleRoute>}>
           <Route path="dashboard" element={<DashboardCocinero />} />
           <Route path="inventario-cocinero" element={<InventarioIngredientesCocinero />} />
           <Route path="pedidos-cocinero" element={<PedidosCocinero />} />
         </Route>
-        {/* Mesero layout con rutas anidadas */}
         <Route path="/mesero" element={<RoleRoute allowedRoles={["mesero"]}><MeseroLayout /></RoleRoute>}>
           <Route path="dashboard" element={<DashboardMesero />} />
           <Route path="historial-pedidos" element={<HistorialPedidos />} />

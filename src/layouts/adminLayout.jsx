@@ -1,8 +1,4 @@
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-
-
 export default function AdminLayout() {
   const navigate = useNavigate();
 
@@ -36,11 +32,8 @@ export default function AdminLayout() {
       <div className="flex-1 flex flex-col">
         <header className="w-full flex justify-end items-center p-4 border-">
           <div className="flex items-center gap-2">
-          <div className="w-15 h-15 rounded-full bg-black text-white flex items-center justify-center">
-            <FontAwesomeIcon icon={faUser} />
-        </div>
             <div className="text-right text-x pr-3 my-5">
-              <div className="font-medium">Admin</div>
+              <div className="font-medium">Administrador</div>
             </div>
           </div>
         </header>

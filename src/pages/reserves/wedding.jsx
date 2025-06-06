@@ -22,14 +22,14 @@ const Wedding = () => {
           setUser(parsed);
         }
       } catch (err) {
-        console.error("Error al parsear user:", err);
+        console.error(err);
       }
     }
   }, []);
   
   const handleReserveWedding = async (e) => {
     e.preventDefault();
-    if (!numero || !fecha || !cantidad || !decoracion || !comentarios) {
+    if (!numero || !fecha || !cantidad ) {
       toast.error('Campos obligatorios');
       return;
     }
@@ -40,7 +40,7 @@ const Wedding = () => {
       cantidad,
       decoracion,
       comentarios,
-      tipoEvento: 'wedding'
+      tipoEvento: 'boda'
     };
     const token = localStorage.getItem('token');
     if (!token) {
