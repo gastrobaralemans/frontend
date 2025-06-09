@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "../../components/auth/button";
 import { Eye } from "lucide-react";
-import {toast} from "sonner"
+import { toast } from "sonner"
 
 const MenuCardsAdmin = ({ item, abrirModal, abrirPromoInfo }) => {
   const { name, description, imageUrl, price, promoPrice } = item;
@@ -18,7 +18,7 @@ const MenuCardsAdmin = ({ item, abrirModal, abrirPromoInfo }) => {
             <span className="line-through text-[#740000] mr-2">${price.toFixed(2)}</span>
             <span className="text-black">${promoPrice.toFixed(2)}</span>
             <button onClick={() => abrirPromoInfo(item)} className="absolute top-2 right-2">
-               <Eye className="text-[#740000] w-10 h-10" />
+              <Eye className="text-[#740000] w-10 h-10" />
             </button>
           </>
         ) : (
@@ -31,7 +31,7 @@ const MenuCardsAdmin = ({ item, abrirModal, abrirPromoInfo }) => {
 };
 
 const PromoModal = ({ item, onClose, fetchMenu }) => {
-  const [promoPrice, setPromoPrice] =useState(item.promoPrice || "");
+  const [promoPrice, setPromoPrice] = useState(item.promoPrice || "");
   const [startDate, setStartDate] = useState(
     item.startDate ? item.startDate + "T00:00" : ""
   );
@@ -39,20 +39,20 @@ const PromoModal = ({ item, onClose, fetchMenu }) => {
     item.endDate ? item.endDate + "T00:00" : ""
   );
   const [promoDescription, setPromoDescription] = useState(item.promoDescription || "");
-  const Validate = () =>{
+  const Validate = () => {
     if (!promoPrice || isNaN(promoPrice) || Number(promoPrice) <= 0) {
       toast.error("El precio tiene que ser positivo");
       return false;
-  }
-  if (Number(promoPrice) >= item.price) {
-    toast.error(`El precio de promo no puede ser mayor o igual a $${item.price}`);
-    return false;
-  }
-  if (!startDate || !endDate) {
-    toast.error("Las fechas son obligatorias");
-    return false;
-  }
-  const now = new Date();
+    }
+    if (Number(promoPrice) >= item.price) {
+      toast.error(`El precio de promo no puede ser mayor o igual a $${item.price}`);
+      return false;
+    }
+    if (!startDate || !endDate) {
+      toast.error("Las fechas son obligatorias");
+      return false;
+    }
+    const now = new Date();
     const start = new Date(startDate);
     const end = new Date(endDate);
     if (start < now) {
@@ -72,7 +72,7 @@ const PromoModal = ({ item, onClose, fetchMenu }) => {
 
 
   const submitPromo = async () => {
-    if(!Validate()) return;
+    if (!Validate()) return;
     const token = localStorage.getItem("token");
     try {
       const response = await fetch(`http://localhost:8080/api/menu/${item.id}/promo`, {
@@ -202,7 +202,7 @@ const MenuPromosAdmin = () => {
       toast.error(`Error al eliminar promo: ${error.response?.data || "Error desconocido"}`);
     }
   };
-  
+
   const filtrado = menu
     .map((cat) => ({
       ...cat,

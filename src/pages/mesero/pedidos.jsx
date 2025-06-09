@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {toast} from "sonner"
+import { toast } from "sonner"
 
 const PedidosMesero = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -36,22 +36,22 @@ const PedidosMesero = () => {
   };
 
   const enviarPedido = async () => {
-  try {
-    const body = {
-      platillos: seleccionados.map((p) => ({ id: p.id, cantidad: p.cantidad }))
-    };
+    try {
+      const body = {
+        platillos: seleccionados.map((p) => ({ id: p.id, cantidad: p.cantidad }))
+      };
 
-    await axios.post("http://localhost:8080/api/pedidos/mesero", body, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
+      await axios.post("http://localhost:8080/api/pedidos/mesero", body, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
 
-    toast.success("Pedido registrado con éxito");
-    setSeleccionados([]);
-  } catch (error) {
-    console.error("Error enviando pedido", error);
-    toast.error("Error enviando pedido: " + (error.response?.data || "ver consola"));
-  }
-};
+      toast.success("Pedido registrado con éxito");
+      setSeleccionados([]);
+    } catch (error) {
+      console.error("Error enviando pedido", error);
+      toast.error("Error enviando pedido: " + (error.response?.data || "ver consola"));
+    }
+  };
 
   return (
     <div className="p-6">

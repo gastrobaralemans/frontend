@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {toast} from "sonner"
+import { toast } from "sonner"
 
 
 const AsociarIngredientes = () => {
@@ -19,16 +19,16 @@ const AsociarIngredientes = () => {
     try {
       const res = await axios.get("http://localhost:8080/api/menu/platillos", {
         headers: { Authorization: `Bearer ${token}` },
-    });
-    console.log("Platillos recibidos:", res.data);
+      });
+      console.log("Platillos recibidos:", res.data);
       setPlatillos(res.data);
     } catch (error) {
       console.error("Error cargando platillos", error);
-       if (error.response?.status === 401) {
-      toast.error("Sesión expirada.");
-    } else {
-      toast.error("No se pudieron cargar los platillos.");
-    }
+      if (error.response?.status === 401) {
+        toast.error("Sesión expirada.");
+      } else {
+        toast.error("No se pudieron cargar los platillos.");
+      }
     }
   };
 
@@ -41,43 +41,43 @@ const AsociarIngredientes = () => {
       console.log("Ingredientes recibidos:", res.data);
     } catch (error) {
       console.error("Error cargando ingredientes", error);
-       if (error.response?.status === 401) {
-      toast.error("Sesión expirada.");
-    } else {
-      toast.error("No se pudieron cargar los ingredientes");
-    }
+      if (error.response?.status === 401) {
+        toast.error("Sesión expirada.");
+      } else {
+        toast.error("No se pudieron cargar los ingredientes");
+      }
     }
   };
 
   const fetchReceta = async (platilloId) => {
-  try {
-    const res = await axios.get(`http://localhost:8080/api/recetas/${platilloId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    try {
+      const res = await axios.get(`http://localhost:8080/api/recetas/${platilloId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-    if (Array.isArray(res.data)) {
-      setRecetas(res.data);
-      console.log("Recetas cargadas:", res.data);
-    } else {
-      console.error("Respuesta inesperada:", res.data);
-      toast.error("Error al procesar la receta.");
-      setRecetas([]); 
+      if (Array.isArray(res.data)) {
+        setRecetas(res.data);
+        console.log("Recetas cargadas:", res.data);
+      } else {
+        console.error("Respuesta inesperada:", res.data);
+        toast.error("Error al procesar la receta.");
+        setRecetas([]);
+      }
+
+    } catch (error) {
+      console.error("Error cargando receta", error);
+      setRecetas([]);
+      if (error.response) {
+        if (error.response.status === 401) {
+          toast.error("sesión expirada")
+        } else {
+          toast.error("error al cargar recetas")
+        }
+      } else {
+        toast.error("sin respuesta del servidor")
+      }
     }
-
-  } catch (error) {
-    console.error("Error cargando receta", error);
-    setRecetas([]);
-    if(error.response){
-            if(error.response.status===401){
-              toast.error("sesión expirada")
-            }else{
-              toast.error("error al cargar recetas")
-            }
-          }else{
-            toast.error("sin respuesta del servidor")
-          }
-  }
-};
+  };
 
   const handleSubmit = async () => {
     const yaAsociado = recetas.some(
@@ -88,7 +88,7 @@ const AsociarIngredientes = () => {
       toast.error("Este ingrediente ya está asociado a este platillo.");
       return;
     }
- console.log("Enviando receta:", formulario);
+    console.log("Enviando receta:", formulario);
     try {
       await axios.post(
         "http://localhost:8080/api/recetas",
@@ -104,15 +104,15 @@ const AsociarIngredientes = () => {
       toast.success("Ingrediente asociado");
     } catch (error) {
       console.error("Error asociando ingrediente", error);
-      if(error.response){
-              if(error.response.status===401){
-                toast.error("sesión expirada")
-              }else{
-                toast.error("no se pudo asociar el ingrediente")
-              }
-            }else{
-              toast.error("sin respuesta del servidor")
-            }
+      if (error.response) {
+        if (error.response.status === 401) {
+          toast.error("sesión expirada")
+        } else {
+          toast.error("no se pudo asociar el ingrediente")
+        }
+      } else {
+        toast.error("sin respuesta del servidor")
+      }
     }
   };
 
@@ -122,21 +122,21 @@ const AsociarIngredientes = () => {
   }, []);
 
   useEffect(() => {
-  const platilloGuardado = localStorage.getItem("platilloId");
+    const platilloGuardado = localStorage.getItem("platilloId");
 
-  fetchPlatillos();
-  fetchIngredientes();
+    fetchPlatillos();
+    fetchIngredientes();
 
-  if (platilloGuardado) {
-    setFormulario((f) => ({ ...f, platilloId: platilloGuardado }));
-  }
-}, []);
+    if (platilloGuardado) {
+      setFormulario((f) => ({ ...f, platilloId: platilloGuardado }));
+    }
+  }, []);
 
-useEffect(() => {
-  if (formulario.platilloId) {
-    fetchReceta(formulario.platilloId);
-  }
-}, [formulario.platilloId]);
+  useEffect(() => {
+    if (formulario.platilloId) {
+      fetchReceta(formulario.platilloId);
+    }
+  }, [formulario.platilloId]);
 
 
   return (
@@ -147,8 +147,8 @@ useEffect(() => {
         <select
           className="border p-2"
           value={formulario.platilloId}
-          onChange={(e) =>{
-             const id = e.target.value;
+          onChange={(e) => {
+            const id = e.target.value;
             localStorage.setItem("platilloId", id);
             setFormulario({ ...formulario, platilloId: id });
           }}
@@ -171,9 +171,9 @@ useEffect(() => {
           <option value="">-- Ingrediente --</option>
           {[...new Map(ingredientes.map(i => [i.nombre, i])).values()].map((i) => (
             <option key={i.id} value={i.id}>
-                {i.nombre}
+              {i.nombre}
             </option>
-            ))}
+          ))}
         </select>
 
         <input

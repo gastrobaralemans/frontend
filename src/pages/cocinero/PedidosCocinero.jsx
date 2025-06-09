@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {toast}from "sonner"
+import { toast } from "sonner"
 
 const PedidosCocinero = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -11,7 +11,7 @@ const PedidosCocinero = () => {
     try {
       const response = await axios.get("http://localhost:8080/api/pedidos", {
         headers: { Authorization: `Bearer ${token}` }
-        });
+      });
 
       setPedidos(response.data);
     } catch (error) {

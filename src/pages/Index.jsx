@@ -21,19 +21,21 @@ const Home = () => {
         <>
             <div className='p-4'>
                 <Nav />
-                    <Banner className="font-comfortaa text-3xl mt-8 mb-6" mensaje="Donde los sueños se convierten en platillos" />
-                    <CarouselModel />
-                    <Banner className="font-comfortaa text-3xl mt-10 mb-4" mensaje="¡Deliciosos platillos!" />
+                <Banner className="font-comfortaa text-3xl mt-8 mb-6" mensaje="Donde los sueños se convierten en platillos" />
+                <CarouselModel />
 
-                    <div className="flex justify-center my-20">
-                    <button onClick={handleVerMenu} className="px-4 py-2 bg-black text-white">
+                <section className="text-center max-w-4xl mx-auto px-4 py-12 space-y-10">
+                    <Banner className="font-comfortaa text-3xl text-[#740000]" mensaje="¡Deliciosos platillos!" />
+
+                    <button
+                        onClick={handleVerMenu}
+                        className="px-6 py-2 bg-black text-white"
+                    >
                         Ver menú completo
                     </button>
-                    </div>
 
-                    <Banner className="font-comfortaa text-3xl my-8" mensaje="¡Reservas para eventos!" />
-
-                
+                    <Banner className="font-comfortaa text-3xl text-[#740000]" mensaje="¡Reservas para eventos!" />
+                </section>
                 <ReservasCards />
                 <Footer />
             </div>

@@ -7,7 +7,7 @@ export default function MeseroLayout() {
     localStorage.removeItem("nombre");
     localStorage.removeItem("rol");
     navigate("/login");
-};
+  };
   return (
     <div className="flex h-screen">
       <aside className="w-48 bg-white border-r border-gray-200 p-4 flex flex-col justify-between">

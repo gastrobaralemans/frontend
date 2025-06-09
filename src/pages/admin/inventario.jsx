@@ -16,17 +16,17 @@ const InventarioAdmin = () => {
       setIngredientes(response.data);
     } catch (error) {
       console.error("Error al cargar ingredientes", error);
-      if(error.response){
-        if(error.response.status===401){
+      if (error.response) {
+        if (error.response.status === 401) {
           toast.error("sesión expirada")
-        }else{
+        } else {
           toast.error("error al cargar ingredientes")
         }
-      }else{
+      } else {
         toast.error("sin respuesta del servidor")
       }
-      
-  }
+
+    }
   };
 
   const agregarIngrediente = async () => {
@@ -36,19 +36,19 @@ const InventarioAdmin = () => {
       });
       setNuevo({ nombre: "", cantidadDisponible: "" });
       fetchIngredientes();
-       toast.success("Ingrediente agregado");
+      toast.success("Ingrediente agregado");
     } catch (error) {
       console.error("Error al agregar", error);
-      if(error.response){
-        if(error.response.status===401){
+      if (error.response) {
+        if (error.response.status === 401) {
           toast.error("sesión expirada")
-        }else{
+        } else {
           toast.error("error al agregar ingredientes")
         }
-      }else{
+      } else {
         toast.error("sin respuesta del servidor")
       }
-      
+
     }
   };
 
@@ -64,13 +64,13 @@ const InventarioAdmin = () => {
       toast.success("Ingrediente actualizado");
     } catch (error) {
       console.error("Error al actualizar", error);
-      if(error.response){
-        if(error.response.status===401){
+      if (error.response) {
+        if (error.response.status === 401) {
           toast.error("sesión expirada")
-        }else{
+        } else {
           toast.error("error al actualizar ingredientes")
         }
-      }else{
+      } else {
         toast.error("sin respuesta del servidor")
       }
     }
@@ -91,15 +91,15 @@ const InventarioAdmin = () => {
             toast.success("Ingrediente eliminado");
           } catch (error) {
             console.error("Error al eliminar", error);
-            if(error.response){
-        if(error.response.status===401){
-          toast.error("sesión expirada")
-        }else{
-          toast.error("error al eiminar ingredientes")
-        }
-      }else{
-        toast.error("sin respuesta del servidor")
-      }
+            if (error.response) {
+              if (error.response.status === 401) {
+                toast.error("sesión expirada")
+              } else {
+                toast.error("error al eiminar ingredientes")
+              }
+            } else {
+              toast.error("sin respuesta del servidor")
+            }
           }
         }
       }
@@ -157,7 +157,7 @@ const InventarioAdmin = () => {
                   {ing.cantidadDisponible <= (ing.stockMinimo || 5) ? 'Bajo Stock' : 'Ok'}
                 </span>
               </td>
-                  <td className="p-2 flex items-center justify-center gap-2">
+              <td className="p-2 flex items-center justify-center gap-2">
                 <input
                   type="number"
                   value={ing.cantidadDisponible}
@@ -179,7 +179,7 @@ const InventarioAdmin = () => {
                 </button>
               </td>
 
-    
+
               <td className="p-2 border">
                 <button
                   onClick={() => eliminarIngrediente(ing.id)}

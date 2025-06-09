@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import html2pdf from "html2pdf.js";
-import {toast} from "sonner"
+import { toast } from "sonner"
 
 
 const ReportesAdmin = () => {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useCarrito} from "../context/CarritoContext"
+import { useCarrito } from "../context/CarritoContext"
 import { toast } from "sonner";
 
 
@@ -11,11 +11,11 @@ const ModalPlatillo = ({ item, onClose }) => {
   const { agregarAlCarrito } = useCarrito();
 
   const handleAgregar = () => {
-  console.log("Agregando:", item.name, cantidad);
-  agregarAlCarrito({ ...item, cantidad });
-  toast.success(`"${item.name}" añadido al carrito (${cantidad}) items`);
-  onClose();
-};
+    console.log("Agregando:", item.name, cantidad);
+    agregarAlCarrito({ ...item, cantidad });
+    toast.success(`"${item.name}" añadido al carrito (${cantidad}) items`);
+    onClose();
+  };
 
 
   return (

@@ -27,7 +27,7 @@ const PostAdmin = () => {
             setPosts(postsData);
         } catch (error) {
             console.error("Error al cargar los posts:", error);
-            setPosts([]); 
+            setPosts([]);
         }
     };
 
@@ -49,7 +49,7 @@ const PostAdmin = () => {
             setTitulo("");
             setImagen("");
             setDescripcion("");
-            obtenerPosts(); 
+            obtenerPosts();
         } catch (error) {
             console.error("Error al crear post:", error);
         }

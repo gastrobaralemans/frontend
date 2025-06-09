@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import {toast} from "sonner"
+import { toast } from "sonner"
 
 
 const ReservasAdmin = () => {
@@ -54,7 +54,7 @@ const ReservasAdmin = () => {
   const pendientes = filtradas.filter((r) => r.estado === "pendiente");
   const aceptadas = filtradas.filter((r) => r.estado === "aceptado");
   const rechazadas = filtradas.filter((r) => r.estado === "rechazado");
-  
+
 
   const TablaReservas = ({ titulo, reservas, mostrarAcciones }) => (
     <div className="mb-8">

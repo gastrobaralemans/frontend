@@ -34,9 +34,8 @@ const ReservasCards = () => {
             {events.map((event, index) => (
                 <div
                     key={index}
-                    className={`flex flex-col md:flex-row items-stretch gap-8 transition-transform duration-300 ${
-                        index % 2 !== 0 ? 'md:flex-row-reverse' : ''
-                    }`}
+                    className={`flex flex-col md:flex-row items-stretch gap-8 transition-transform duration-300 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''
+                        }`}
                 >
                     <div className="w-full md:w-1/2 overflow-hidden rounded-[75px] h-full">
                         <img
@@ -53,12 +52,12 @@ const ReservasCards = () => {
                         <div className="mt-6">
                             <Button
                                 className="bg-black text-white w-full"
-                                
+
                                 onClick={() => {
                                     const token = localStorage.getItem('token');
-                                    if(token){
+                                    if (token) {
                                         navigate(event.path);
-                                    }else{
+                                    } else {
                                         navigate('/register')
                                     }
                                 }

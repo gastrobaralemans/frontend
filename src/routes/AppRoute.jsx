@@ -48,17 +48,17 @@ const AppRouter = () => {
         <Route path="/birthdayreserve" element={<RoleRouteRegister allowedRoles={["usuario"]}><Birthday /></RoleRouteRegister>} />
         <Route path="/graduationreserve" element={<RoleRouteRegister allowedRoles={["usuario"]}><Graduation /></RoleRouteRegister>} />
         <Route path="/weddingreserve" element={<RoleRouteRegister allowedRoles={["usuario"]}><Wedding /></RoleRouteRegister>} />
-        <Route path="/postusers" element={<RoleRouteRegister allowedRoles={["usuario"]}><PostUser/></RoleRouteRegister>}/>
-        <Route path="/carrito" element={<RoleRouteRegister allowedRoles={["usuario"]}><CarritoPage/></RoleRouteRegister>}/>
+        <Route path="/postusers" element={<RoleRouteRegister allowedRoles={["usuario"]}><PostUser /></RoleRouteRegister>} />
+        <Route path="/carrito" element={<RoleRouteRegister allowedRoles={["usuario"]}><CarritoPage /></RoleRouteRegister>} />
         <Route path="/admin" element={<RoleRoute allowedRoles={["admin"]}><AdminLayout /></RoleRoute>}>
           <Route path="dashboard" element={<DashboardAdmin />} />
-          <Route path="users" element={<UsersTable/>}/>
+          <Route path="users" element={<UsersTable />} />
           <Route path="menu-promos" element={<MenuPromosAdmin />} />
           <Route path="pedidos" element={<PedidosAdmin />} />
           <Route path="reportes" element={<ReportesAdmin />} />
           <Route path="reservas" element={<ReservasAdmin />} />
           <Route path="inventario" element={<InventarioAdmin />} />
-          <Route path="receta" element={<AsociarIngredientes/>}/>
+          <Route path="receta" element={<AsociarIngredientes />} />
           <Route path="post" element={<PostAdmin />} />
         </Route>
         <Route path="/cocinero" element={<RoleRoute allowedRoles={["cocinero"]}><CocineroLayout /></RoleRoute>}>

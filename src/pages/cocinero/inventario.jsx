@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {toast} from "sonner"
+import { toast } from "sonner"
 
 const InventarioCocinero = () => {
   const [ingredientes, setIngredientes] = useState([]);

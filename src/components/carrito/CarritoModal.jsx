@@ -1,6 +1,6 @@
 import React from "react";
-import {useCarrito} from "../context/CarritoContext";
-import {toast} from "sonner"
+import { useCarrito } from "../context/CarritoContext";
+import { toast } from "sonner"
 
 const CarritoModal = ({ onClose }) => {
   const { items, cambiarCantidad, quitarDelCarrito, total, vaciar } = useCarrito();
@@ -13,7 +13,7 @@ const CarritoModal = ({ onClose }) => {
       metodoPago: "Efectivo"
     };
 
-     try {
+    try {
       const res = await fetch("http://localhost:8080/api/pedidos", {
         method: "POST",
         headers: {

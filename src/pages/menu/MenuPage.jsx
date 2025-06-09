@@ -3,7 +3,7 @@ import { authFetch } from "../../utils/authFetch";
 import MenuSection from "../../components/index/MenuSection";
 import Nav from "../../layouts/nav";
 import Footer from "../../components/footer";
-import {toast} from "sonner"
+import { toast } from "sonner"
 
 const MenuPage = () => {
   const [menu, setMenu] = useState([]);
@@ -22,7 +22,7 @@ const MenuPage = () => {
         console.error('Error al cargar menú:', err);
         toast.error("Sesión expirada.");
       });
-  }, []); 
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">

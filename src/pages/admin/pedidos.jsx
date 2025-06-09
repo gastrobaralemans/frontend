@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {toast} from "sonner"
+import { toast } from "sonner"
 
 const PedidosAdmin = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -76,9 +76,8 @@ const PedidosAdmin = () => {
               <td className="p-2">#{p.id}</td>
               <td className="p-2">{new Date(p.fecha).toLocaleString()}</td>
               <td
-                className={`p-2 ${
-                  p.estado === "Entregado" ? "text-[#740000] font-semibold" : ""
-                }`}
+                className={`p-2 ${p.estado === "Entregado" ? "text-[#740000] font-semibold" : ""
+                  }`}
               >
                 {p.estado}
               </td>

@@ -9,7 +9,7 @@ const HistorialPedidos = () => {
       const token = localStorage.getItem("token");
       try {
         const res = await axios.get("http://localhost:8080/api/pedidos/mesero/historial", {
-            headers: { Authorization: `Bearer ${token}` }
+          headers: { Authorization: `Bearer ${token}` }
 
         });
         const entregados = res.data.filter(p => p.estado === "ENTREGADO");

@@ -1,6 +1,6 @@
 import { useCarrito } from "../../components/context/CarritoContext";
 import { useNavigate } from "react-router-dom";
-import {toast} from "sonner"
+import { toast } from "sonner"
 
 const CarritoPage = () => {
   const { items, cambiarCantidad, quitarDelCarrito, total, vaciar } = useCarrito();

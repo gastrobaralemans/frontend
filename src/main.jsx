@@ -10,7 +10,7 @@ createRoot(document.getElementById('root')).render(
   <CarritoProvider>
     <StrictMode>
       <>
-        <Toaster richColors position="top-center" /> 
+        <Toaster richColors position="top-center" />
         <App />
       </>
     </StrictMode>

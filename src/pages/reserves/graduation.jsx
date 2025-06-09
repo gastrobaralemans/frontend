@@ -3,7 +3,7 @@ import Input from '../../components/auth/input';
 import Button from '../../components/auth/button';
 import Nav from '../../layouts/nav';
 import Footer from '../../components/footer';
-import {toast} from "sonner"
+import { toast } from "sonner"
 
 const Graduation = () => {
   const [user, setUser] = useState({ nombre: '', correo: '' });
@@ -26,7 +26,7 @@ const Graduation = () => {
       }
     }
   }, []);
-  
+
   const handleReserveGraduation = async (e) => {
     e.preventDefault();
     const data = {
@@ -51,19 +51,19 @@ const Graduation = () => {
         },
         body: JSON.stringify(data)
       });
-      if(!response.ok){
-        if(response.status===400){
-          const errorData=await response.json();
-          Object.entries(errorData).forEach(([campo,mensaje])=>{
+      if (!response.ok) {
+        if (response.status === 400) {
+          const errorData = await response.json();
+          Object.entries(errorData).forEach(([campo, mensaje]) => {
             toast.error(`${campo}: ${mensaje}`);
           });
-        }else{
-          const text=await response.text();
+        } else {
+          const text = await response.text();
           toast.error(text)
         }
-      }else{
-        const text=await response.text();
-          toast.success(text)
+      } else {
+        const text = await response.text();
+        toast.success(text)
       }
     } catch (error) {
       console.error(error);
@@ -72,29 +72,29 @@ const Graduation = () => {
   };
 
   return (
-  <div className="min-h-screen flex flex-col">
-    <Nav />
+    <div className="min-h-screen flex flex-col">
+      <Nav />
 
-    <main className="flex-grow flex items-center justify-center">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-sm">
-        <h2 className="text-2xl font-semibold text-[#7A0000] mb-4">Reserva para graduaciones</h2>
+      <main className="flex-grow flex items-center justify-center">
+        <div className="bg-white p-8 rounded shadow-md w-full max-w-sm">
+          <h2 className="text-2xl font-semibold text-[#7A0000] mb-4">Reserva para graduaciones</h2>
 
-        <form className="space-y-4" onSubmit={handleReserveGraduation}>
-          <Input type="text" name="nombre" value={user.nombre} readOnly />
-          <Input type="email" name="correo" value={user.correo} readOnly />
-          <Input type="tel" name="numero" placeholder="0000-0000" value={numero} onChange={(e) => setNumero(e.target.value)} />
-          <Input type="datetime-local" name="fecha" value={fecha} onChange={(e) => setFecha(e.target.value)} />
-          <Input type="number" name="cantidad" placeholder="n# personas" min={1} value={cantidad} onChange={(e) => setCantidad(e.target.value)} />
-          <Input type="text" name="decoracion" placeholder="¿decoración especial?" value={decoracion} onChange={(e) => setDecoracion(e.target.value)} />
-          <Input type="text" name="comentarios" placeholder="comentarios" value={comentarios} onChange={(e) => setComentarios(e.target.value)} />
-          <Button type="submit">Hacer reserva</Button>
-        </form>
-      </div>
-    </main>
+          <form className="space-y-4" onSubmit={handleReserveGraduation}>
+            <Input type="text" name="nombre" value={user.nombre} readOnly />
+            <Input type="email" name="correo" value={user.correo} readOnly />
+            <Input type="tel" name="numero" placeholder="0000-0000" value={numero} onChange={(e) => setNumero(e.target.value)} />
+            <Input type="datetime-local" name="fecha" value={fecha} onChange={(e) => setFecha(e.target.value)} />
+            <Input type="number" name="cantidad" placeholder="n# personas" min={1} value={cantidad} onChange={(e) => setCantidad(e.target.value)} />
+            <Input type="text" name="decoracion" placeholder="¿decoración especial?" value={decoracion} onChange={(e) => setDecoracion(e.target.value)} />
+            <Input type="text" name="comentarios" placeholder="comentarios" value={comentarios} onChange={(e) => setComentarios(e.target.value)} />
+            <Button type="submit">Hacer reserva</Button>
+          </form>
+        </div>
+      </main>
 
-    <Footer />
-  </div>
-);
+      <Footer />
+    </div>
+  );
 };
 
 export default Graduation;
