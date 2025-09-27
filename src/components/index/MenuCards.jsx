@@ -21,7 +21,7 @@ const MenuCards = ({ item }) => {
           <span>${price.toFixed(2)}</span>
         )}
       </div>
-      <Button onClick={() => setShowModal(true)}>Ordenar platillo</Button>
+      <Button onClick={() => setShowModal(true)}>Ordenar</Button>
       {showModal && <ModalPlatillo item={item} onClose={() => setShowModal(false)} />}
     </div>
   );
