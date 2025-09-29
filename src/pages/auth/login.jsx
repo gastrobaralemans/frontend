@@ -5,6 +5,7 @@ import Nav from '../../layouts/nav';
 import Input from '../../components/auth/input';
 import Button from '../../components/auth/button';
 import Footer from '../../components/footer';
+import { useForgotPasswordStore } from '../../store';
 import { toast } from 'sonner';
 
 
@@ -13,6 +14,12 @@ const Login = () => {
   const [correo, setCorreo] = useState('');
   const [pass, setPass] = useState('');
   const navigate = useNavigate();
+  const { reset } = useForgotPasswordStore();
+
+  React.useEffect(() => {
+    reset();
+  }, [reset]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -90,6 +97,13 @@ const Login = () => {
                 Registrate
               </Link>
             </p>
+            <p className="text-center mt-4 text-sm">
+              ¿Olvidaste la contraseña?{" "}
+              <Link to={"/codemail"} className="text-red-800 hover:underline">
+                Actualizar
+              </Link>
+            </p>
+            
           </div>
         </main>
         <Footer />

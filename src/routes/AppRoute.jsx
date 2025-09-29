@@ -2,6 +2,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RoleRoute from "./RoleRoute.jsx";
 import PublicOnlyRoute from "./publicsRoutes.jsx";
 import RoleRouteRegister from "./RoleRouteRegister.jsx";
+import CodeMail from "../pages/password/codemail.jsx";
+import VerificationCode from "../pages/password/verificationcode.jsx";
+import ResetPassword from "../pages/password/resetpassword.jsx";
 
 //user
 import Home from "../pages/Index.jsx";
@@ -36,6 +39,7 @@ import MeseroLayout from "../layouts/meseroLayout.jsx";
 import DashboardMesero from "../pages/mesero/dashboard.jsx";
 import HistorialPedidos from "../pages/mesero/historialPedidos.jsx";
 import PedidosMesero from "../pages/mesero/pedidos.jsx";
+import SendMail from "../pages/password/codemail.jsx";
 const AppRouter = () => {
   return (
     <BrowserRouter>
@@ -44,6 +48,9 @@ const AppRouter = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<PublicOnlyRoute><Login /></PublicOnlyRoute>} />
         <Route path="/register" element={<PublicOnlyRoute><Register /></PublicOnlyRoute>} />
+        <Route path="/codemail" element={<PublicOnlyRoute><CodeMail/></PublicOnlyRoute>}/>
+        <Route path="/verificationcode" element={<PublicOnlyRoute><VerificationCode/></PublicOnlyRoute>}/>
+        <Route path="/resetpassword" element={<PublicOnlyRoute><ResetPassword/></PublicOnlyRoute>}/>
         <Route path="/menu" element={<RoleRouteRegister allowedRoles={["usuario"]}><MenuPage /></RoleRouteRegister>} />
         <Route path="/birthdayreserve" element={<RoleRouteRegister allowedRoles={["usuario"]}><Birthday /></RoleRouteRegister>} />
         <Route path="/graduationreserve" element={<RoleRouteRegister allowedRoles={["usuario"]}><Graduation /></RoleRouteRegister>} />
