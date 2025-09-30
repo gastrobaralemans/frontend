@@ -8,15 +8,18 @@ import CarritoModal from "../components/carrito/CarritoModal";
 const Nav = () => {
   const token = localStorage.getItem("token");
   const nombre = localStorage.getItem("nombre");
+  const correo= localStorage.getItem("correo");
   const navigate = useNavigate();
 
   const [notis, setNotis] = useState([]);
   const [mostrarNotis, setMostrarNotis] = useState(false);
   const [mostrarCarrito, setMostrarCarrito] = useState(false);
+  const [mostrarPerfil, setMostrarPerfil]= useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("nombre");
+    localStorage.removeItem("correo");
     navigate("/login");
   };
 
@@ -38,6 +41,7 @@ const Nav = () => {
     }
   };
 
+  
   return (
     <>
       <nav className="flex items-center justify-between px-8 py-4">
@@ -57,7 +61,12 @@ const Nav = () => {
             </>
           ) : (
             <>
-              <span className="text-lg font-semibold">{nombre}</span>
+              <button 
+                onClick={() => setMostrarPerfil(true)}
+                className="text-lg font-semibold"
+              >
+                {nombre}
+              </button>
 
               <Link to="/postusers" className="flex items-center gap-1 text-gray-700 hover:text-black">
                 <FileText className="h-6 w-6" />
@@ -112,8 +121,54 @@ const Nav = () => {
           </div>
         </div>
       )}
+      {mostrarPerfil && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96 max-h-[80vh] overflow-y-auto relative">
+            <h2 className="text-xl font-bold mb-4">Mi Perfil</h2>
+            <button
+              onClick={() => setMostrarPerfil(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+            >
+              ✖
+            </button>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Nombre
+                </label>
+                <input
+                  type="text"
+                  value={nombre || ""}
+                  readOnly
+                  className="w-full px-3 py-2 cursor-not-allowed"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Correo Electrónico
+                </label>
+                <input
+                  type="email"
+                  value={correo || ""}
+                  readOnly
+                  className="w-full px-3 py-2 cursor-not-allowed"
+                />
+              </div>
+            </div>
+
+            <div className="mt-6 flex justify-end">
+              <Button onClick={() => setMostrarPerfil(false)}>
+                Cerrar
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
+
+  
 };
 
 export default Nav;

@@ -39,6 +39,9 @@ const Login = () => {
         localStorage.setItem("token", json.token);
         localStorage.setItem("refreshToken", json.refreshToken);
         localStorage.setItem("nombre", json.nombre);
+
+        localStorage.setItem("correo", json.correo || correo);
+
         localStorage.setItem("rol", json.rol);
 
         toast.success("Inicio de sesión exitoso");
