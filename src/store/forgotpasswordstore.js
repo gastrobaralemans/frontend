@@ -16,5 +16,5 @@ export const useForgotPasswordStore = create(
       name: 'forgot-password-storage',
       getStorage: () => localStorage,
     }
-     )
+  )
 );
