@@ -25,7 +25,7 @@ const MenuCardsAdmin = ({ item, abrirModal, abrirPromoInfo }) => {
           <span>${price.toFixed(2)}</span>
         )}
       </div>
-      <Button onClick={() => abrirModal(item)}>Crear promo</Button>
+      <Button onClick={() => abrirModal(item)}>Crear promoción</Button>
     </div>
   );
 };
@@ -130,12 +130,12 @@ const PromoModal = ({ item, onClose, fetchMenu }) => {
         />
         <input
           type="text"
-          placeholder="Descripción de la promo"
+          placeholder="Descripción de la promoción"
           value={promoDescription}
           onChange={(e) => setPromoDescription(e.target.value)}
           className="border p-2 w-full mb-2"
         />
-        <Button onClick={submitPromo}>Guardar promo</Button>
+        <Button onClick={submitPromo}>Guardar promoción</Button>
         <button onClick={onClose} className="mt-2 text-red-700 w-full">
           Cancelar
         </button>

@@ -88,7 +88,7 @@ const PostAdmin = () => {
                         required
                     ></textarea>
                 </div>
-                <Button type="submit">Crear post</Button>
+                <Button type="submit">Crear publicación</Button>
             </form>
 
             <div>

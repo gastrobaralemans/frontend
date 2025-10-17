@@ -37,7 +37,7 @@ export default function AdminLayout() {
             <Link to="/admin/reportes" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Reportes</Link>
             <Link to="/admin/inventario" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Inventario</Link>
             <Link to="/admin/receta" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Asociar ingredientes</Link>
-            <Link to="/admin/post" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Crear Post</Link>
+            <Link to="/admin/post" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Crear Publicación</Link>
             <Link to="/admin/reservas" className="block pl-5 hover:text-[#7A0000] hover:font-bold">Reservas</Link>
             <button onClick={handleLogout} className="text-left w-full pl-5 hover:text-[#7A0000] hover:font-bold">Cerrar sesión</button>
           </nav>
@@ -78,7 +78,7 @@ export default function AdminLayout() {
               <Link to="/admin/reportes" className="block py-2 px-4 hover:text-[#7A0000] hover:font-bold" onClick={cerrarMenu}>Reportes</Link>
               <Link to="/admin/inventario" className="block py-2 px-4 hover:text-[#7A0000] hover:font-bold" onClick={cerrarMenu}>Inventario</Link>
               <Link to="/admin/receta" className="block py-2 px-4 hover:text-[#7A0000] hover:font-bold" onClick={cerrarMenu}>Asociar ingredientes</Link>
-              <Link to="/admin/post" className="block py-2 px-4 hover:text-[#7A0000] hover:font-bold" onClick={cerrarMenu}>Crear Post</Link>
+              <Link to="/admin/post" className="block py-2 px-4 hover:text-[#7A0000] hover:font-bold" onClick={cerrarMenu}>Crear publicación</Link>
               <Link to="/admin/reservas" className="block py-2 px-4 hover:text-[#7A0000] hover:font-bold" onClick={cerrarMenu}>Reservas</Link>
               <button onClick={() => { handleLogout(); cerrarMenu(); }} className="text-left py-2 px-4 hover:text-[#7A0000] hover:font-bold">Cerrar sesión</button>
             </nav>

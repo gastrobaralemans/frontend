@@ -78,7 +78,7 @@ const Nav = () => {
               <Link 
                 to="/postusers" 
                 className="flex items-center gap-1 text-gray-700 hover:text-black transition-colors"
-                title="Mis publicaciones"
+                title="Publicaciones"
               >
                 <FileText className="h-5 w-5 lg:h-6 lg:w-6" />
               </Link>
@@ -146,7 +146,7 @@ const Nav = () => {
                     onClick={cerrarMenu}
                   >
                     <FileText className="h-5 w-5" />
-                    <span>Mis publicaciones</span>
+                    <span>Publicaciones</span>
                   </Link>
 
                   <Link
