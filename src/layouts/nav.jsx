@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Bell, ShoppingCart, FileText, Menu, X } from "lucide-react";
 import Button from "../components/auth/button";
-import CarritoModal from "../components/carrito/CarritoModal";
 
 const Nav = () => {
   const token = localStorage.getItem("token");
@@ -47,7 +46,7 @@ const Nav = () => {
 
   return (
     <>
-      <nav className="flex items-center justify-between px-4 py-4 md:px-8 relative bg-white shadow-sm">
+      <nav className="flex items-center justify-between px-4 py-4 md:px-8 relative">
         <Link to="/" className="flex-shrink-0">
           <img 
             src="/logotipe.png" 
@@ -58,26 +57,29 @@ const Nav = () => {
 
         <div className="hidden md:flex items-center gap-4 lg:gap-6">
           {!token ? (
-            <>
-              <Button className="text-sm lg:text-base">
-                <Link to="/register">Crear cuenta</Link>
-              </Button>
-              <Button className="text-sm lg:text-base">
-                <Link to="/login">Iniciar sesión</Link>
-              </Button>
+            <>              <button className="bg-black text-white px-8 py-3">
+                <Link to="/register" className="inline-block w-full h-full">
+                  Crear cuenta
+                </Link>
+              </button>
+                            <button className="bg-black text-white px-8 py-3">
+                <Link to="/login" className="inline-block w-full h-full">
+                  Iniciar sesión
+                </Link>
+              </button>
             </>
           ) : (
             <>
               <button 
                 onClick={() => setMostrarPerfil(true)}
-                className="text-base lg:text-lg font-semibold hover:text-blue-600 transition-colors"
+                className="text-base lg:text-lg font-semibold px-4 py-2"
               >
                 {nombre}
               </button>
 
               <Link 
                 to="/postusers" 
-                className="flex items-center gap-1 text-gray-700 hover:text-black transition-colors"
+                className="flex items-center gap-1 text-black"
                 title="Publicaciones"
               >
                 <FileText className="h-5 w-5 lg:h-6 lg:w-6" />
@@ -85,7 +87,7 @@ const Nav = () => {
 
               <Link
                 to="/carrito"
-                className="flex items-center text-gray-700 hover:text-black transition-colors"
+                className="flex items-center text-black"
                 aria-label="Ir al carrito"
               >
                 <ShoppingCart className="h-5 w-5 lg:h-6 lg:w-6" />
@@ -93,39 +95,37 @@ const Nav = () => {
 
               <button 
                 onClick={obtenerNotis} 
-                className="relative text-gray-700 hover:text-black transition-colors"
+                className="relative text-black"
               >
                 <Bell className="h-5 w-5 lg:h-6 lg:w-6" />
               </button>
 
-              <Button 
+              <button 
                 onClick={handleLogout}
-                className="text-sm lg:text-base"
+                className="bg-black text-white px-6 py-3"
               >
                 Cerrar sesión
-              </Button>
+              </button>
             </>
           )}
         </div>
 
         <button 
-          className="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100"
+          className="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100 transition-colors"
           onClick={() => setMenuAbierto(!menuAbierto)}
         >
           {menuAbierto ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
-
-        {/* Menú móvil */}
         {menuAbierto && (
-          <div className="absolute top-full left-0 right-0 bg-white shadow-lg md:hidden z-40">
-            <div className="flex flex-col p-4 gap-4">
+          <div className="absolute top-full left-0 right-0 bg-white shadow-lg md:hidden z-40 border-t">
+            <div className="flex flex-col p-4 gap-3">
               {!token ? (
                 <>
-                  <Button className="w-full justify-center">
-                    <Link to="/register" onClick={cerrarMenu}>Crear cuenta</Link>
+                  <Button className="w-full justify-center py-4 text-base font-semibold bg-[#7A0000] hover:bg-[#5a0000]">
+                    <Link to="/register" onClick={cerrarMenu} className="w-full block">Crear cuenta</Link>
                   </Button>
-                  <Button className="w-full justify-center">
-                    <Link to="/login" onClick={cerrarMenu}>Iniciar sesión</Link>
+                  <Button className="w-full justify-center py-4 text-base font-semibold border-2 border-[#7A0000] text-[#7A0000] bg-transparent hover:bg-[#7A0000] hover:text-white">
+                    <Link to="/login" onClick={cerrarMenu} className="w-full block">Iniciar sesión</Link>
                   </Button>
                 </>
               ) : (
@@ -135,36 +135,33 @@ const Nav = () => {
                       setMostrarPerfil(true);
                       cerrarMenu();
                     }}
-                    className="text-lg font-semibold text-left py-2 border-b"
+                    className="text-lg font-semibold text-left py-3 px-4 border-b border-gray-100 hover:bg-gray-50 rounded-lg transition-colors"
                   >
                     {nombre}
                   </button>
-
                   <Link 
                     to="/postusers" 
-                    className="flex items-center gap-2 py-2 border-b text-gray-700 hover:text-black"
+                    className="flex items-center gap-3 py-3 px-4"
                     onClick={cerrarMenu}
                   >
                     <FileText className="h-5 w-5" />
                     <span>Publicaciones</span>
                   </Link>
-
                   <Link
                     to="/carrito"
-                    className="flex items-center gap-2 py-2 border-b text-gray-700 hover:text-black"
+                    className="flex items-center gap-3 py-3 px-4"
                     onClick={cerrarMenu}
                     aria-label="Ir al carrito"
                   >
                     <ShoppingCart className="h-5 w-5" />
                     <span>Carrito</span>
                   </Link>
-
                   <button 
                     onClick={() => {
                       obtenerNotis();
                       cerrarMenu();
                     }} 
-                    className="flex items-center gap-2 py-2 border-b text-gray-700 hover:text-black text-left"
+                    className="flex items-center gap-3 py-3 px-4"
                   >
                     <Bell className="h-5 w-5" />
                     <span>Notificaciones</span>
@@ -175,7 +172,7 @@ const Nav = () => {
                       handleLogout();
                       cerrarMenu();
                     }}
-                    className="w-full justify-center mt-2"
+                    className="w-full justify-center py-4 mt-2 text-base font-semibold bg-gray-800 hover:bg-gray-700"
                   >
                     Cerrar sesión
                   </Button>

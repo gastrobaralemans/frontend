@@ -55,9 +55,18 @@ const CodeMail =()=>{
 
                     
                     <form onSubmit={handleSubmit} className="space-y-4">
-                        <div>
-                            <Input type="text" name="correo" placeholder="johndoe@mail.com" value={email} onChange={(e) => setEmail(e.target.value)} />
-                            <Button type="submit">Enviar código</Button>
+                        <div className="space-y-3">
+                            <Input 
+                                type="text" 
+                                name="correo" 
+                                placeholder="johndoe@mail.com" 
+                                value={email} 
+                                onChange={(e) => setEmail(e.target.value)} 
+                                className="w-full"
+                            />
+                            <Button type="submit" className="w-full">
+                                Enviar código
+                            </Button>
                         </div>
                     </form>
                     
