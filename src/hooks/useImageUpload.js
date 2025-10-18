@@ -3,7 +3,7 @@ import Resizer from "react-image-file-resizer";
 import axios from "axios";
 
 const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD;
-const UPLOAD_PRESET = "gastrobar_posts";
+const UPLOAD_PRESET = "gastrobar_post";
 
 export default function useImageUpload() {
   const [loading, setLoading] = useState(false);

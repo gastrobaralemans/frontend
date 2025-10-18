@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Button from "../../components/auth/button";
+import useImageUpload from "../../hooks/useImageUpload";
+import { toast } from 'sonner';
 
 const PostAdmin = () => {
     const [titulo, setTitulo] = useState("");
-    const [imagen, setImagen] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [posts, setPosts] = useState([]);
+    const [imagen, setImagen]=useState("");
+    const [preview, setPreview] = useState("");
+    const { subir, loading } = useImageUpload();
 
     useEffect(() => {
         obtenerPosts();
@@ -31,8 +35,23 @@ const PostAdmin = () => {
         }
     };
 
+    const handleFile = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const localUrl = URL.createObjectURL(file);
+    setPreview(localUrl);
+    subir(file)
+      .then((urlRemota) => {
+        setImagen(urlRemota);
+        URL.revokeObjectURL(localUrl);
+      })
+      .catch(() => toast.error("Error al subir imagen"));
+  };
+
+
     const crearPost = async (e) => {
         e.preventDefault();
+        if (!imagen) return toast.error("Espera a que la imagen termine de subir");
         const token = localStorage.getItem("token");
         if (!token) return;
 
@@ -49,12 +68,12 @@ const PostAdmin = () => {
             setTitulo("");
             setImagen("");
             setDescripcion("");
+            setPreview("");
             obtenerPosts();
         } catch (error) {
             console.error("Error al crear post:", error);
         }
     };
-
     return (
         <div className="p-6">
             <h2 className="text-2xl font-semibold mb-4">Publicaciones</h2>
@@ -70,14 +89,12 @@ const PostAdmin = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <input
-                        type="text"
-                        value={imagen}
-                        placeholder="Insertar URL de imagen"
-                        onChange={(e) => setImagen(e.target.value)}
-                        className="w-full border px-3 py-2"
-                        required
-                    />
+                    <label className="block mb-1 font-medium">Imagen</label>
+                        <input type="file" accept="image/*" onChange={handleFile} />
+                            {loading && <p className="text-sm text-gray-500">Subiendo...</p>}
+                        {preview && (
+                            <img src={preview} alt="preview" className="mt-2 h-32 object-cover rounded" />
+                        )}
                 </div>
                 <div className="mb-4">
                     <textarea
