@@ -38,7 +38,7 @@ const ConfirmarPago = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md text-center space-y-2">
-        <h2 className="text-xl font-bold text-[#740000] mb-4">Confirmación de Pago</h2>
+        <h2 className="text-xl font-bold text-[#740000] mb-4">Datos de Transacción</h2>
         <p><b>Nombre:</b> {state.nombre}</p>
         <p><b>Número:</b> **** **** **** {state.numero.slice(-4)}</p>
         <p><b>Expiración:</b> {state.expiracion}</p>
@@ -48,13 +48,13 @@ const ConfirmarPago = () => {
         <div className="flex justify-center gap-3 mt-6">
           <button
             onClick={handleConfirmar}
-            className="bg-green-600 text-white py-2 px-4 rounded"
+            className="bg-[#740000] text-white py-2 px-4"
           >
             Confirmar Pago
           </button>
           <button
             onClick={() => navigate(-1)}
-            className="bg-gray-300 py-2 px-4 rounded"
+            className="bg-black text-white py-2 px-4"
           >
             Cancelar
           </button>

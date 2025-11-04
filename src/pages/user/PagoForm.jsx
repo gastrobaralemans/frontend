@@ -72,9 +72,9 @@ const PagoForm = () => {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+          className="w-full bg-[#740000] text-white py-2"
         >
-          Validar y Continuar
+          Validar tarjeta
         </button>
       </form>
     </div>
