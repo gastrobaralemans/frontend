@@ -1,5 +1,6 @@
 import { useCarrito } from "../../components/context/CarritoContext";
 import { useNavigate } from "react-router-dom";
+import { CreditCard } from "lucide-react";
 import { toast } from "sonner"
 
 const CarritoPage = () => {
@@ -75,6 +76,13 @@ const CarritoPage = () => {
             className="w-full bg-black text-white py-2"
           >
             Enviar Pedido
+          </button>
+          <button
+            onClick={() => navigate("/pago")}
+            className="w-full bg-[#740000] text-white py-2 flex items-center justify-center gap-2 mt-2"
+          >
+            <CreditCard className="w-5 h-5" />
+            Realizar Pago con Tarjeta
           </button>
         </div>
       )}

@@ -16,6 +16,8 @@ import Graduation from "../pages/reserves/graduation.jsx";
 import Wedding from "../pages/reserves/wedding.jsx";
 import PostUser from "../pages/user/postusers.jsx";
 import CarritoPage from "../pages/user/CarritoPage.jsx";
+import PagoForm from "../pages/user/PagoForm.jsx";
+import ConfirmarPago from "../pages/user/Confirmpago.jsx";
 // Admin
 import AdminLayout from "../layouts/adminLayout.jsx";
 import DashboardAdmin from "../pages/admin/dashboard.jsx";
@@ -57,6 +59,8 @@ const AppRouter = () => {
         <Route path="/weddingreserve" element={<RoleRouteRegister allowedRoles={["usuario"]}><Wedding /></RoleRouteRegister>} />
         <Route path="/postusers" element={<RoleRouteRegister allowedRoles={["usuario"]}><PostUser /></RoleRouteRegister>} />
         <Route path="/carrito" element={<RoleRouteRegister allowedRoles={["usuario"]}><CarritoPage /></RoleRouteRegister>} />
+        <Route path="/pago" element={<RoleRoute allowedRoles={["usuario"]}><PagoForm/></RoleRoute>}/>
+        <Route path="/pago/confirmacion" element={<RoleRoute allowedRoles={["usuario"]}><ConfirmarPago/></RoleRoute>}/>
         <Route path="/admin" element={<RoleRoute allowedRoles={["admin"]}><AdminLayout /></RoleRoute>}>
           <Route path="dashboard" element={<DashboardAdmin />} />
           <Route path="users" element={<UsersTable />} />
