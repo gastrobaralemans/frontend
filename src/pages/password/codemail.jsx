@@ -7,6 +7,7 @@ import Button from '../../components/auth/button';
 import { useForgotPasswordStore } from '../../store/forgotpasswordstore';
 const CodeMail =()=>{
     const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const {setMail, setStep}=useForgotPasswordStore();
 
@@ -64,8 +65,8 @@ const CodeMail =()=>{
                                 onChange={(e) => setEmail(e.target.value)} 
                                 className="w-full"
                             />
-                            <Button type="submit" className="w-full">
-                                Enviar código
+                            <Button type="submit" disabled={loading}>
+                                {loading ? 'Enviando...' : 'Enviar Código'}
                             </Button>
                         </div>
                     </form>
