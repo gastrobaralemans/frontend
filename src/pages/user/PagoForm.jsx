@@ -16,7 +16,27 @@ const PagoForm = () => {
   const [mostrarModal, setMostrarModal] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if ((name === "numero" || name === "cvv") && /\D/.test(value)) return;
+    if (name === "numero" && value.length > 16) return;
+    if (name === "cvv" && value.length > 3) return;
+
+    setForm({ ...form, [name]: value });
+  };
+
+  const validarExpiracion = (exp) => {
+    const expRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
+    if (!expRegex.test(exp)) return false;
+
+    const [mes, year] = exp.split("/").map(Number);
+    const actual = new Date();
+    const yearActual = Number(actual.getFullYear().toString().slice(-2));
+    const mesActual = actual.getMonth() + 1;
+
+    return year > yearActual || (year === yearActual && mes >= mesActual);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,9 +47,29 @@ const PagoForm = () => {
     }
 
     if (form.numero.length !== 16 || form.cvv.length !== 3) {
-      toast.error("Datos de tarjeta inválidos");
+      toast.error("Número de tarjeta o CVV inválido");
       return;
     }
+    if (!validarExpiracion(form.expiracion)) {
+      toast.error("Fecha de expiración inválida o vencida");
+      return;
+    }
+
+    const tarjetasGuardadas = JSON.parse(localStorage.getItem("tarjetas_usadas") || "[]");
+    const cvvsGuardados = JSON.parse(localStorage.getItem("cvvs_usados") || "[]");
+
+    if (tarjetasGuardadas.includes(form.numero)) {
+      toast.error("Esta tarjeta ya fue registrada anteriormente");
+      return;
+    }
+
+    if (cvvsGuardados.includes(form.cvv)) {
+      toast.error("Este CVV ya fue utilizado en una transacción anterior");
+      return;
+    }
+
+    localStorage.setItem("tarjetas_usadas", JSON.stringify([...tarjetasGuardadas, form.numero]));
+    localStorage.setItem("cvvs_usados", JSON.stringify([...cvvsGuardados, form.cvv]));
 
     setMostrarModal(true);
   };
