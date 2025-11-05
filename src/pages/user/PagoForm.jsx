@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import { useCarrito } from "../../components/context/CarritoContext";
 import { toast } from "sonner";
+const logos = {
+  visa: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg",
+  mastercard: "https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg",
+};
+const detectarTipoTarjeta = (numero) => {
+  if (!numero) return null;
+  if (/^4/.test(numero)) return "visa";
+  if (/^(5[1-5]|2[2-7])/.test(numero)) return "mastercard";
+  return null;
+};
 
 const PagoForm = () => {
   const { total, items, vaciar } = useCarrito();
@@ -12,7 +22,7 @@ const PagoForm = () => {
     expiracion: "",
     cvv: "",
   });
-
+  const [tipoTarjeta, setTipoTarjeta] = useState(null);
   const [mostrarModal, setMostrarModal] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -24,6 +34,10 @@ const PagoForm = () => {
     if (name === "cvv" && value.length > 3) return;
 
     setForm({ ...form, [name]: value });
+    if (name === "numero") {
+      const tipo = detectarTipoTarjeta(value);
+      setTipoTarjeta(tipo);
+    }
   };
 
   const validarExpiracion = (exp) => {
@@ -106,10 +120,10 @@ const PagoForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-lg shadow-md w-full max-w-md space-y-4 relative"
+        className="bg-white p-8 rounded-lg shadow-md w-full max-w-md space-y-4"
       >
         <h2 className="text-2xl font-bold text-[#740000] text-center">
           Datos de Tarjeta
@@ -123,15 +137,24 @@ const PagoForm = () => {
           onChange={handleChange}
           value={form.nombre}
         />
-        <input
-          type="text"
-          name="numero"
-          placeholder="Número de tarjeta (16 dígitos)"
-          maxLength="16"
-          className="border p-2 w-full"
-          onChange={handleChange}
-          value={form.numero}
-        />
+        <div className="relative">
+          <input
+            type="text"
+            name="numero"
+            placeholder="Número de tarjeta (16 dígitos)"
+            maxLength="16"
+            className="border p-2 w-full pr-12"
+            value={form.numero}
+            onChange={handleChange}
+          />
+          {tipoTarjeta && (
+            <img
+              src={logos[tipoTarjeta]}
+              alt={tipoTarjeta}
+              className="absolute right-3 top-2 h-6"
+            />
+          )}
+        </div>
         <div className="flex gap-2">
           <input
             type="text"
